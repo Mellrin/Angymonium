@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@lightest-color: #F4F4F7;
+@light-color: #80B6B2;
+@primary-color: #005C71;
+@secondary-color: #5599B0;
+@thirdary-color: #337A90;
+@darkest-color: #2F4858;
+@red: #DA0037;
+@accent: #F69333;
+
+html {
+    --font-primary: 'Varela Round', sans-serif;
+    --font-secondary: 'Comfortaa', cursive;
+    --container-width: 1024px;
+
+    --lightest-color: @lightest-color;
+    --light-color: @light-color;
+    --primary-color: @primary-color;
+    --secondary-color: @secondary-color;
+    --secondary-hover-color: @thirdary-color;
+    --darkest-color: @darkest-color;
+    --red-color: @red;
+    --accent-color: @accent;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background: var(--darkest-color);
+    color: var(--lightest-color);
+    font-family: var(--font-primary);
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: auto;
+}
