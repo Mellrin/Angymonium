@@ -1,0 +1,19 @@
+<form class="form">
+    <h2 class="form__heading">{{form.form_name}}</h2>
+    <ng-container *ngFor="let item of form.form_fields">
+        <div class="form__field">
+            <input [name]="item.field" [type]="item.field" class="form-control" [placeholder]="item.field" required>
+            <div class="form__field--error" *ngIf=false>
+                some error
+            </div>
+        </div>
+    </ng-container>
+
+    <button class="btn mt-12" #submit type="button" (click)="onSubmit()">{{form.form_name}}</button>
+</form>
+
+<div class="description">
+    <h3 class="form__heading">{{form.description_heading}}</h3>
+    <p>{{form.description_text}}</p>
+    <a [routerLink]="form.description_btn.route" class="btn--outline mt-12"> {{form.description_btn.text}}</a>
+</div>
