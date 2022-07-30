@@ -1,15 +1,17 @@
-<form class="form">
+<form class="form" [formGroup]="form.form_group" #signForm="ngForm">
     <h2 class="form__heading">{{form.form_name}}</h2>
-    <ng-container *ngFor="let item of form.form_fields">
+    <ng-container *ngFor="let control of form.form_group.controls | keyvalue">
         <div class="form__field">
-            <input [name]="item.field" [type]="item.field" class="form-control" [placeholder]="item.field" required>
-            <div class="form__field--error" *ngIf=false>
-                some error
+            <input class="form-control" [placeholder]="control.key | titlecase" [formControlName]="control.key"
+                [ngClass]="{'form-control--error': signForm.submitted && control.value.errors }">
+
+            <div class="form__field--error" *ngIf="signForm.submitted && control.value.errors">
+                {{ getErrorMsg(control.value) }}
             </div>
         </div>
     </ng-container>
 
-    <button class="btn mt-12" #submit type="button" (click)="onSubmit()">{{form.form_name}}</button>
+    <button class="btn mt-12" #submit type="submit" (click)="onSubmit()">{{form.form_name}}</button>
 </form>
 
 <div class="description">

@@ -53,6 +53,10 @@
       &:-webkit-autofill:focus {
         transition: background-color 600000s 0s, color 600000s 0s;
       }
+      &--error {
+        border-image-slice: 1;
+        border-image-source: linear-gradient(to right, var(--red-color), var(--secondary-color));
+      }
     }
 
     &--error {
