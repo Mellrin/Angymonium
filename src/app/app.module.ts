@@ -7,6 +7,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { SignFormComponent } from './components/helper/sign-form/sign-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     ROUTING,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [RootComponent]

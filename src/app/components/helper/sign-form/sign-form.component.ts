@@ -1,13 +1,16 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
   styleUrls: ['./sign-form.component.less']
 })
-export class SignFormComponent implements OnInit {
+export class SignFormComponent {
+  @ViewChild('submit', { static: true }) button!: ElementRef;
+
   @HostBinding('class.reverse') @Input() reverse: boolean = false;
+
   @Output() onSubmitEvent = new EventEmitter<any>();
 
   @Input() form = {
@@ -20,20 +23,23 @@ export class SignFormComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.warn(this.form.form_group)
-  }
   onSubmit() {
     this.onSubmitEvent.emit();
-    console.warn(this.form.form_group)
+  }
+
+  getButton() {
+    return this.button.nativeElement
   }
 
   getErrorMsg(x: any) {
     //console.warn(x.errors)
-    if (x.errors.required){
+    if (x.errors?.backendError) {
+      return x.errors.backendError
+    }
+    if (x.errors?.required) {
       return 'field is required'
     }
-    if (x.errors.minlength){
+    if (x.errors?.minlength) {
       return `type at least ${x.errors.minlength.requiredLength} characters`
     }
     return 'error msg'
