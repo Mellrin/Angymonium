@@ -5,7 +5,12 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const User = require('./model/user');
 
-const url = 'mongodb://localhost/user';
+const url = 'mongodb://localhost/wunderbase';
+
+mongoose.connect(url, { useNewUrlParser: true })
+const db = mongoose.connection
+db.on('error', (error) => console.error(error))
+db.once('open', () => console.log('Connected to database'))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -16,7 +21,7 @@ app.use(session({
     resave: true
 }));
 
-app.get('/api/logout', (req, res) => {
+app.get('/api/user/logout', (req, res) => {
     req.session.destroy();
     res.json({})
 })
@@ -26,37 +31,58 @@ app.get('/api/user/session', async (req, res) => {
     await req.session.username ? res.status(200).send({ username: req.session.username, isAdmin: req.session.isAdmin }) : res.json({});
 });
 
-app.post('/api/user/login', (req, res) => {
-    mongoose.connect(url, function (err) {
-        if (err) throw err;
-        User.find({
-            username: req.body.username
-        }, function (err, user) {
+app.post('/api/user/login', async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.body.username });
 
-            if (err) throw err;
-
-            if (user.length === 0) {
-                return res.status(200).json({
-                    error: 'No such user exists',
-                    field: 'username'
-                })
-            }
-
-            if (user[0].password !== req.body.password) {
-                return res.status(200).json({
-                    error: 'Wrong password',
-                    field: 'password'
-                })
-            }
-
-            req.session.username = user[0].name;
-            req.session.isAdmin = user[0].permissions;
-
-            return res.status(200).json({
-                username: req.session.username, isAdmin: req.session.isAdmin
+        if (user === null) {
+            return res.status(404).json({
+                error: 'No such user exists',
+                field: 'username'
             })
-        })
-    });
+        }
+        if (user.password !== req.body.password) {
+            return res.status(401).json({
+                error: 'Wrong password',
+                field: 'password'
+            })
+        }
+        req.session.username = user.username;
+        res.status(200).json({ username: req.session.username })
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
 })
+
+app.post('/api/user/signup', async (req, res) => {
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    })
+    try {
+        const newUser = await user.save();
+        req.session.username = req.body.username;
+        res.status(201).json(newUser)
+    } catch (err) {
+        if (err.code === 11000) {
+            res.status(400).json({
+                error: 'Such user already exists',
+                field: Object.keys(err.keyPattern)[0]
+            })
+        } else {
+            res.status(400).json({ message: err.message })
+        }
+    }
+})
+
+app.get('/api/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+})
+
 
 app.listen(3000, () => console.log('Server running on port 3000!'))

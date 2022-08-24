@@ -1,13 +1,14 @@
 import { Component, ElementRef, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SignFormComponent } from '../helper/sign-form/sign-form.component';
-import { fromEvent, Subscription, filter, switchMap } from 'rxjs';
+import { fromEvent, Subscription, filter, switchMap, catchError, of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styles: [':host {align-self: center}']
 })
 export class LoginComponent implements AfterViewInit, OnDestroy {
   form = {
@@ -26,7 +27,7 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
   subscription: Subscription = new Subscription;
 
   constructor(
-    private UserService: UserService,
+    private userService: UserService,
     private router: Router,
   ) { }
 
@@ -35,16 +36,16 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
       fromEvent(this.child.getButton(), 'click')
         .pipe(
           filter(_ => Object.values(this.form.form_group.controls).every(val => !val.errors)),
-          switchMap(_ => this.UserService.submitLogin({ username: this.form.form_group.get('username')?.value, password: this.form.form_group.get('password')?.value }))
+          switchMap(_ => this.userService.submitLogin({ username: this.form.form_group.get('username')?.value, password: this.form.form_group.get('password')?.value }).pipe(catchError(e => of(e))))
         )
         .subscribe((res) => {
-          // console.log(res)
+           // console.log(res)
           if (res.error) {
-            this.form.form_group.controls[`${res?.field}`].setErrors({ backendError: res?.error });
+            this.form.form_group.controls[`${res?.error.field}`].setErrors({ backendError: res?.error.error });
             return
           }
 
-          //this.UserService.currentUser$.next(res);
+          this.userService.currentUser$.next(res);
           this.router.navigate(['/home']);
         })
   }

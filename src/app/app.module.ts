@@ -8,6 +8,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { SignFormComponent } from './components/helper/sign-form/sign-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     SignupComponent,
     LandingComponent,
-    SignFormComponent
+    SignFormComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,11 @@
 <header class="container">
     <nav>
         <ul>
-            <ng-container>
-                <li><a href="#" (click)="logout()" class="nav-link">Log out</a></li>
-                <li><a routerLink="/" class="nav-link">Landing</a></li>
+            <ng-container *ngIf="user">
+                <li><a routerLink="/home" class="nav-link">Workspace</a></li>
+                <li><a routerLink="/user-list" class="nav-link">User list</a></li>
+                <!-- <li><a routerLink="/profile" class="nav-link"> {{user}} profile</a></li> -->
+                <li><a href="/" (click)="logout()" class="nav-link">Log out</a></li>
             </ng-container>
         </ul>
     </nav>
