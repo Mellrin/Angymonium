@@ -3,6 +3,7 @@ const express = require('express'),
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const User = require('./model/user');
 
 const url = 'mongodb://localhost/wunderbase';
@@ -41,25 +42,29 @@ app.post('/api/user/login', async (req, res) => {
                 field: 'username'
             })
         }
-        if (user.password !== req.body.password) {
+
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            req.session.username = user.username;
+            res.status(200).json({ username: req.session.username })
+        } else {
             return res.status(401).json({
                 error: 'Wrong password',
                 field: 'password'
             })
         }
-        req.session.username = user.username;
-        res.status(200).json({ username: req.session.username })
+        
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
 
 app.post('/api/user/signup', async (req, res) => {
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-    })
     try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        const user = new User({
+            username: req.body.username,
+            password: hashedPassword
+        })
         const newUser = await user.save();
         req.session.username = req.body.username;
         res.status(201).json(newUser)

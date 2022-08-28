@@ -35,11 +35,10 @@ export class UserService {
   }
 
   public logout() {
-    return this.http.get('/api/user/logout', {
-      withCredentials: true
-    }).subscribe(_ => {
-      this.currentUser$.next({ username: '' });
-    });
+    return this.http.get('/api/user/logout')
+      .subscribe(_ => {
+        this.currentUser$.next({ username: '' });
+      });
   }
 
   public getAllUsers() {
