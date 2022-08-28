@@ -1,8 +1,8 @@
 <form class="form" [formGroup]="form.form_group" #signForm="ngForm">
     <h2 class="form__heading">{{form.form_name}}</h2>
-    <ng-container *ngFor="let control of form.form_group.controls | keyvalue">
+    <ng-container *ngFor="let control of form.form_group.controls | keyvalue: keepOrder">
         <div class="form__field">
-            <input class="form-control" [placeholder]="control.key | titlecase" [formControlName]="control.key"
+            <input class="form-control" [placeholder]="control.key | placeholder" [formControlName]="control.key"
                 [ngClass]="{'form-control--error': signForm.submitted && control.value.errors }">
 
             <div class="form__field--error" *ngIf="signForm.submitted && control.value.errors">

@@ -11,11 +11,14 @@ import { Router } from '@angular/router';
   styles: [':host {align-self: center}']
 })
 export class SignupComponent implements AfterViewInit, OnDestroy {
+  emailPattern: string = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w{2,}([-.]\\w+)*$";
   form = {
     form_name: 'Sign up',
     form_group: new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      password: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      confirmPassword: new FormControl('', [Validators.required, ConfirmValidator('password')]),
     }),
     description_heading: "Already registered?",
     description_text: 'To keep connected with us login with your personal info',
@@ -37,7 +40,7 @@ export class SignupComponent implements AfterViewInit, OnDestroy {
       fromEvent(this.child.getButton(), 'click')
         .pipe(
           filter(_ => Object.values(this.form.form_group.controls).every(val => !val.errors)),
-          switchMap(_ => this.userService.submitSignup({ username: this.form.form_group.get('username')?.value, password: this.form.form_group.get('password')?.value }).pipe(catchError(e => of(e))))
+          switchMap(_ => this.userService.submitSignup({ email: this.form.form_group.get('email')?.value, username: this.form.form_group.get('username')?.value, password: this.form.form_group.get('password')?.value }).pipe(catchError(e => of(e))))
         )
         .subscribe((res) => {
           // console.log(res)
@@ -59,4 +62,16 @@ export class SignupComponent implements AfterViewInit, OnDestroy {
     this.subscription.unsubscribe()
   }
 
+}
+
+export function ConfirmValidator(confirmpassword: string) {
+  return (control: FormControl): { [key: string]: boolean } | null => {
+    if (!control || !control.parent) {
+      return null;
+    }
+    if (control.value !== control.parent.get(confirmpassword)?.value) {
+      return { 'mismatch': true };
+    }
+    return null;
+  };
 }

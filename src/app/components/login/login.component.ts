@@ -14,7 +14,7 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
   form = {
     form_name: 'Sign in',
     form_group: new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     }),
     description_heading: "Don't have an account yet?",
@@ -36,7 +36,7 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
       fromEvent(this.child.getButton(), 'click')
         .pipe(
           filter(_ => Object.values(this.form.form_group.controls).every(val => !val.errors)),
-          switchMap(_ => this.userService.submitLogin({ username: this.form.form_group.get('username')?.value, password: this.form.form_group.get('password')?.value }).pipe(catchError(e => of(e))))
+          switchMap(_ => this.userService.submitLogin({ email: this.form.form_group.get('email')?.value, password: this.form.form_group.get('password')?.value }).pipe(catchError(e => of(e))))
         )
         .subscribe((res) => {
            // console.log(res)

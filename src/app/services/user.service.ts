@@ -4,8 +4,9 @@ import { filter, noop, Observable, Subject, tap } from 'rxjs';
 
 
 export interface User {
-  username: string;
+  username?: string;
   password: string;
+  email: string;
 }
 
 export interface IUser {
@@ -46,18 +47,14 @@ export class UserService {
   }
 
   public submitLogin(user: User): Observable<IUser> {
-    const body = { username: user.username, password: user.password }
-
-    return this.http.post<User>('/api/user/login', body, {
+    return this.http.post<User>('/api/user/login', user, {
       withCredentials: true
     })
   }
 
   public submitSignup(user: User): Observable<IUser> {
-    console.warn(user)
-    const body = { username: user.username, password: user.password }
 
-    return this.http.post<User>('/api/user/signup', body, {
+    return this.http.post<User>('/api/user/signup', user, {
       withCredentials: true
     })
   }

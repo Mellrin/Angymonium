@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlaceholderPipe } from './components/helper/placeholder.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignupComponent,
     LandingComponent,
     SignFormComponent,
-    UserListComponent
+    UserListComponent,
+    PlaceholderPipe
   ],
   imports: [
     BrowserModule,

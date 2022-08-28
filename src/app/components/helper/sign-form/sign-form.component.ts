@@ -13,17 +13,17 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
         transition(
           ':enter',
           [
-            style({ transform: '{{easeTime}}', opacity: 0 }),
+            style({ transform: '{{easeTime}}' }),
             animate('.3s ease-out',
-              style({ transform: 'none', opacity: 1 }))
+              style({ transform: 'none' }))
           ], { params: { easeTime: 'translateX(10px)' } }
         ),
         transition(
           ':leave',
           [
-            style({ transform: 'none', opacity: 1 }),
+            style({ transform: 'none' }),
             animate('.3s ease-in',
-              style({ transform: '{{easeTime}}', opacity: 0 }))
+              style({ transform: '{{easeTime}}' }))
           ]
         )
       ]
@@ -76,7 +76,17 @@ export class SignFormComponent {
     if (x.errors?.minlength) {
       return `type at least ${x.errors.minlength.requiredLength} characters`
     }
+
+    if (x.errors?.mismatch) {
+      return 'Password and Confirm Password must be match.'
+    }
+
+    if (x.errors?.pattern) {
+      return `wrong pattern`
+    }
     return 'error msg'
   }
+
+  keepOrder = (a: any, b: any) => a
 
 }

@@ -9,8 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 export class UserListComponent implements OnInit {
   userList: Array<any> | undefined;
   column: Array<string> = [];
-
-  config: Array<any> = [{ colname: 'username' }, { colname: 'role' }, { colname: 'registrationDate', type: 'datetime' }];
+  
+  config: Array<any> = [{ colname: 'username' }, { colname: 'email' }, { colname: 'role' }, { colname: 'registrationDate', type: 'datetime' }];
 
   constructor(
     private userServce: UserService

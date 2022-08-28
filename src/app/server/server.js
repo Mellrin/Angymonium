@@ -34,12 +34,12 @@ app.get('/api/user/session', async (req, res) => {
 
 app.post('/api/user/login', async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.body.username });
+        const user = await User.findOne({ email: req.body.email });
 
         if (user === null) {
             return res.status(404).json({
-                error: 'No such user exists',
-                field: 'username'
+                error: 'No such email exists',
+                field: 'email'
             })
         }
 
@@ -52,7 +52,7 @@ app.post('/api/user/login', async (req, res) => {
                 field: 'password'
             })
         }
-        
+
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
@@ -63,6 +63,7 @@ app.post('/api/user/signup', async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         const user = new User({
             username: req.body.username,
+            email: req.body.email,
             password: hashedPassword
         })
         const newUser = await user.save();
