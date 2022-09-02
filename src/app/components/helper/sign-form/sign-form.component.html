@@ -1,7 +1,7 @@
 <form class="form" [formGroup]="form.form_group" #signForm="ngForm">
     <h2 class="form__heading">{{form.form_name}}</h2>
     <ng-container *ngFor="let control of form.form_group.controls | keyvalue: keepOrder">
-        <div class="form__field">
+        <div class="form__field" [attr.data-testid]="control.key">
             <input class="form-control" [placeholder]="control.key | placeholder" [formControlName]="control.key"
                 [ngClass]="{'form-control--error': signForm.submitted && control.value.errors }">
 
@@ -17,5 +17,5 @@
 <div class="description">
     <h3 class="form__heading">{{form.description_heading}}</h3>
     <p>{{form.description_text}}</p>
-    <a [routerLink]="form.description_btn.route" class="btn--outline mt-12"> {{form.description_btn.text}}</a>
+    <a [routerLink]="form.description_btn.route" class="btn--outline mt-12" [attr.data-testid]="'link'"> {{form.description_btn.text}}</a>
 </div>
