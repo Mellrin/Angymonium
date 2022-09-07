@@ -42,8 +42,12 @@ export class UserService {
       });
   }
 
-  public getAllUsers() {
-    return this.http.get('/api/users')
+  public getAllRoles() {
+    return this.http.get<any[]>('/api/roles')
+  }
+
+  public getAllUsers(): Observable<any> {
+    return this.http.get<any[]>('/api/users')
   }
 
   public submitLogin(user: User): Observable<IUser> {
@@ -54,9 +58,13 @@ export class UserService {
 
   public submitSignup(user: User): Observable<IUser> {
 
-    return this.http.post<User>('/api/user/signup', user, {
+    return this.http.post<User>('/api/user/create', user, {
       withCredentials: true
     })
+  }
+
+  public updateUser(user: any) {
+    return this.http.patch('/api/user/update', { username: user.username, role: user.role })
   }
 
 }

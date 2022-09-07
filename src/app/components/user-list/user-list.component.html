@@ -1,22 +1,54 @@
 <h3>
     User list
 </h3>
-<table>
+
+<table *ngIf="userList$ | async as users">
     <thead>
         <tr>
             <th>№</th>
             <th *ngFor="let col of config">{{col.colname}}</th>
+            <th>actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of userList; let i = index">
+        <tr *ngFor="let user of users | sortByRole; let i = index">
             <td>{{i + 1}}</td>
             <td *ngFor="let col of config">
                 <ng-container [ngSwitch]="col.type">
-                    <ng-template ngSwitchCase="datetime">{{ item[col.colname] | date: 'short' }} </ng-template>
-                    <ng-template ngSwitchDefault>{{ item[col.colname] }}</ng-template>
+                    <ng-template ngSwitchCase="datetime">{{ user[col.colname] | date: 'short' }} </ng-template>
+                    <ng-template ngSwitchCase="role">{{ user[col.colname].title }} </ng-template>
+                    <ng-template ngSwitchDefault>{{ user[col.colname] }}</ng-template>
                 </ng-container>
+            </td>
+            <td>
+                <button class="btn-outline" (click)="updatePrivileges(user)">Update privileges</button>
             </td>
         </tr>
     </tbody>
 </table>
+
+<app-modal>
+    <h4>Update privilege</h4>
+    <form class="form" [formGroup]="privilegeForm">
+
+        <div class="form__field">
+            user:
+            <select name="users" id="users" formControlName="users">
+                <ng-container *ngFor="let col of userList$ | async">
+                    <option [value]="col.username">{{ col.username }}</option>
+                </ng-container>
+            </select>
+        </div>
+
+        <div class="form__field">
+            role:
+            <select name="roles" id="roles" formControlName="roles">
+                <ng-container *ngFor="let role of roles$ | async">
+                    <option [value]="role._id">{{role.title}}</option>
+                </ng-container>
+            </select>
+        </div>
+
+        <button class="btn mt-12" #submit type="submit" (click)="update()">Update</button>
+    </form>
+</app-modal>

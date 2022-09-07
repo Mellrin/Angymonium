@@ -10,8 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PlaceholderPipe } from './components/helper/placeholder.pipe';
-
+import { PlaceholderPipe } from './pipes/placeholder.pipe';
+import { ModalComponent } from './components/helper/modal/modal.component';
+import { SortByRolePipe } from './pipes/sort-by-pipe.pipe';
 @NgModule({
   declarations: [
     RootComponent,
@@ -20,7 +21,9 @@ import { PlaceholderPipe } from './components/helper/placeholder.pipe';
     LandingComponent,
     SignFormComponent,
     UserListComponent,
-    PlaceholderPipe
+    PlaceholderPipe,
+    ModalComponent,
+    SortByRolePipe
   ],
   imports: [
     BrowserModule,
