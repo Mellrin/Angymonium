@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserService } from 'src/app/services/user.service';
-import { PlaceholderPipe } from '../helper/placeholder.pipe';
+import { PlaceholderPipe } from 'src/app/pipes/placeholder.pipe';
 import { SignFormComponent } from '../helper/sign-form/sign-form.component';
 
 import { SignupComponent } from './signup.component';

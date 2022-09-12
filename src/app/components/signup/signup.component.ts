@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styles: [':host {align-self: center}']
+  styles: [':host {align-self: center; margin: auto}']
 })
 export class SignupComponent implements AfterViewInit, OnDestroy {
   emailPattern: string = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w{2,}([-.]\\w+)*$";

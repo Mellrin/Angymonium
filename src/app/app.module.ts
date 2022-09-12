@@ -13,6 +13,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaceholderPipe } from './pipes/placeholder.pipe';
 import { ModalComponent } from './components/helper/modal/modal.component';
 import { SortByRolePipe } from './pipes/sort-by-pipe.pipe';
+import { WorkspaceComponent } from './components/workspace/workspace.component';
+import { DropdownComponent } from './components/helper/dropdown/dropdown.component';
+import { SvgIconComponent } from './components/helper/svg-icon/svg-icon.component';
+import { SafeHTMLPipe } from './pipes/safe-html.pipe';
+import { ComplexityLevelComponent } from './components/helper/complexity-level/complexity-level.component';
 @NgModule({
   declarations: [
     RootComponent,
@@ -23,7 +28,12 @@ import { SortByRolePipe } from './pipes/sort-by-pipe.pipe';
     UserListComponent,
     PlaceholderPipe,
     ModalComponent,
-    SortByRolePipe
+    SortByRolePipe,
+    WorkspaceComponent,
+    DropdownComponent,
+    SvgIconComponent,
+    SafeHTMLPipe,
+    ComplexityLevelComponent
   ],
   imports: [
     BrowserModule,

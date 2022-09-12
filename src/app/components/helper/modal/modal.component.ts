@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -9,10 +9,10 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class ModalComponent {
   display$: Observable<'open' | 'close'> = of('close');
-  test: string = ''
 
   constructor(
-    public modalService: ModalService
+    public modalService: ModalService,
+    private eRef: ElementRef
   ) { }
 
   ngOnInit() {
@@ -21,6 +21,12 @@ export class ModalComponent {
 
   close() {
     this.modalService.close();
+  }
+
+  handleClick(event: any) {
+    if (event.target.tagName === 'section'.toUpperCase() && this.eRef.nativeElement.contains(event.target)) {
+      this.modalService.close();
+    }
   }
 
 }

@@ -8,7 +8,7 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 0 6px 1px var(--primary-color);
+  box-shadow: 0 0 3px 1px var(--primary-color);
 
   &.reverse {
     flex-direction: row-reverse;
@@ -22,100 +22,9 @@
   position: relative;
 
   &__heading {
-    color: var(--secondary-color);
     font-size: 28px;
     line-height: 32px;
     margin: 0 0 16px 0;
-  }
-
-  &__field {
-    margin-bottom: 18px;
-    position: relative;
-
-    .form-control {
-      padding: 9px 0;
-      font-size: 14px;
-      line-height: 20px;
-      width: 100%;
-      border: 0;
-      border-bottom: 2px solid var(--secondary-color);
-      background: none;
-      color: var(--lightest-color);
-      outline: none;
-      font-family: var(--font-primary);
-      &::placeholder {
-        color: var(--primary-color);
-      }
-      &:focus, &:focus-visible {
-        border-bottom: 2px solid var(--primary-color);
-      }
-      &:-webkit-autofill,
-      &:-webkit-autofill:focus {
-        transition: background-color 600000s 0s, color 600000s 0s;
-      }
-      &--error {
-        border-image-slice: 1;
-        border-image-source: linear-gradient(to right, var(--red-color), var(--secondary-color));
-      }
-    }
-
-    &--error {
-      color: var(--red-color);
-      font-size: 11px;
-      line-height: 14px;
-      font-weight: 900;
-      position: absolute;
-      bottom: -2px;
-      display: flex;
-      align-items: flex-end;
-      transform: translateY(100%);
-    }
-  }
-}
-
-.btn {
-  padding: 10px 12px;
-  background: var(--secondary-color);
-  font-size: 14px;
-  line-height: 20px;
-  border: 0;
-  width: 100%;
-  color: var(--lightest-color);
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: var(--font-primary);
-
-  &:hover {
-    background: var(--secondary-hover-color);
-  }
-
-  &:focus:active {
-    background: var(--primary-color);
-  }
-
-  &[disabled] {
-    opacity: .5;
-    cursor: not-allowed;
-  }
-
-  &--outline {
-    display: inline-block;
-    padding: 9px 12px;
-    border: 2px solid var(--accent-color);
-    background: none;
-    font-size: 14px;
-    line-height: 20px;
-    text-decoration: none;
-    color: var(--accent-color);
-    width: 100%;
-    text-align: center;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: var(--font-primary);
-    &:hover {
-      background:  var(--accent-color);
-      color: var(--primary-color);
-    }
   }
 }
 
@@ -130,10 +39,6 @@
   .form__heading {
     font-size: 22px;
     line-height: 26px;
-    color: var(--accent-color);
+    color: var(--secondary-color)
   }
-}
-
-.mt-12 {
-  margin-top: 12px;
 }

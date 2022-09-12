@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styles: [':host {align-self: center}']
+  styles: [':host {align-self: center; margin: auto}']
 })
 export class LoginComponent implements AfterViewInit, OnDestroy {
   form = {

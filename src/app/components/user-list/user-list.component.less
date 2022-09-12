@@ -2,11 +2,6 @@
     width: 100%;
 }
 
-h3 {
-    color: var(--accent-color);
-    flex: 1;
-}
-
 table {
     border-collapse: collapse;
 
@@ -17,6 +12,7 @@ table {
             padding: 8px;
             color: var(--secondary-color);
             text-transform: uppercase;
+            border-bottom: 1px solid;
         }
     }
 
@@ -26,64 +22,47 @@ table {
         padding: 8px;
     }
 
-}
-
-.btn {
-    padding: 6px 12px;
-    background: var(--secondary-color);
-    font-size: 14px;
-    line-height: 20px;
-    border: 0;
-    width: 100%;
-    color: var(--lightest-color);
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: var(--font-primary);
-}
-
-.btn-outline {
-    padding: 4px 12px;
-    font-size: 12px;
-    line-height: 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: var(--font-primary);
-    margin-right: 4px;
-    border: 2px solid var(--accent-color);
-    background: none;
-    color: var(--accent-color);
-
-    &:last-child {
-        margin-right: 0;
+    tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.05);
     }
 
-    &:hover {
-        background: var(--accent-color);
-        color: var(--primary-color);
-    }
 }
 
-select {
-    background: none;
-    border: none;
-    font-size: 14px;
-    line-height: 20px;
-    color: white;
-    &:disabled {
-        color: white;
-        opacity: .5;
-    }
-    option {
-        color: var(--accent-color);
-    }
-}
 .form__field {
     margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+
+    &--subheader {
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--secondary-color);
+        margin-right: 4px;
+    }
+
     &:last-of-type {
         margin-bottom: 12px;
     }
 }
-h4 {
-    margin: 0;
-    margin-bottom: 16px;
+
+.subheader {
+    font-size: 14px;
+    line-height: 20px;
+}
+.role() {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+.role {
+    &-basic {
+        .role;
+        background: var(--primary-color);
+    }
+    &-admin {
+        .role;
+        background: var(--accent-color-70);
+    }
 }

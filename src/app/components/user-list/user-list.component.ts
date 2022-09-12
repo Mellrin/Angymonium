@@ -14,19 +14,21 @@ export class UserListComponent implements OnInit {
   roles$!: Observable<any[]>;
   refreshUsers$ = new BehaviorSubject<boolean>(true);
 
-  privilegeForm: FormGroup;
+  user: { username: string, role: { title: string, _id: string } } = {
+    username: '', role: { title: '', _id: '' }
+  };
 
-  config: Array<any> = [{ colname: 'username' }, { colname: 'email' }, { colname: 'role', type: 'role' }, { colname: 'registrationDate', type: 'datetime' }];
+  config: Array<any> = [
+    { colname: 'username', width: '120px' },
+    { colname: 'email', width: '160px' },
+    { colname: 'role', type: 'role', width: '80px' },
+    { colname: 'registrationDate', type: 'datetime', width: '160px' }
+  ];
 
   constructor(
     private userServce: UserService,
     private modalService: ModalService
-  ) {
-    this.privilegeForm = new FormGroup({
-      users: new FormControl(null, [Validators.required]),
-      roles: new FormControl(null, [Validators.required])
-    });
-  }
+  ) { }
 
   ngOnInit() {
     this.userList$ = this.refreshUsers$.pipe(
@@ -37,25 +39,22 @@ export class UserListComponent implements OnInit {
   }
 
   updatePrivileges(col: any) {
-    this.privilegeForm.get('users')?.setValue(col.username);
-    this.privilegeForm.get('users')?.disable();
-    this.privilegeForm.get('roles')?.setValue(col.role._id)
+    this.user.username = col.username
+    this.user.role = col.role
     this.modalService.open();
   }
 
   update() {
-    let user = {
-      username: '', role: {}
-    };
-
-    user.username = this.privilegeForm.controls['users'].value;
-    user.role = this.privilegeForm.controls['roles'].value;
-
-    this.userServce.updateUser(user)
+    this.userServce.updateUser(this.user)
       .pipe(
         catchError(e => of(e)),
         tap(_ => (this.refreshUsers$.next(true), this.modalService.close()))
       )
       .subscribe(noop)
   }
+
+  onSubmit(item: any) {
+    this.user.role = item;
+  }
+
 }
