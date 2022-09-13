@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styles: [':host {align-self: center; margin: auto}']
+  styles: [':host {align-self: center; margin: auto; flex: 1;}']
 })
 export class SignupComponent implements AfterViewInit, OnDestroy {
   emailPattern: string = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w{2,}([-.]\\w+)*$";
@@ -21,7 +21,6 @@ export class SignupComponent implements AfterViewInit, OnDestroy {
       confirmPassword: new FormControl('', [Validators.required, ConfirmValidator('password')]),
     }),
     description_heading: "Already registered?",
-    description_text: 'To keep connected with us login with your personal info',
     description_btn: { text: 'Sign in', route: '/user/signin' },
   }
 

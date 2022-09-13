@@ -34,7 +34,6 @@ describe('SignFormComponent', () => {
         username: new FormControl('', [Validators.required, Validators.minLength(6)]),
       }),
       description_heading: "Some test description",
-      description_text: 'test text',
       description_btn: { text: 'Test button', route: '/user/signup' },
     };
     fixture.detectChanges();

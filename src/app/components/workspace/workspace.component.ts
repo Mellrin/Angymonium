@@ -27,7 +27,7 @@ export class WorkspaceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createQuest() {
+  openModal() {
     this.modalService.open();
   }
 

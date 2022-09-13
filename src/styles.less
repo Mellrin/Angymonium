@@ -6,12 +6,17 @@
 @darkest-color: #2F4858;
 @red: #DA0037;
 @accent: #F69333;
-//text 9ABDD1
+@awesome-gray: #9ABDD1;
 //9BBED2 ligth btn outline  7AB4D2
 //#9A7BA0 fanny
 html {
     --font-primary: 'Varela Round', sans-serif;
     --font-secondary: 'Comfortaa', cursive;
+    --font-btn: 700 13px/16px var(--font-secondary);
+    --font-main-text: 14px/20px var(--font-primary);
+    --font-text-lg: 16px/20px var(--font-primary);
+    --font-sign: 20px/20px var(--font-primary);
+    --font-h1: 700 36px/40px var(--font-secondary);
     --container-width: 1024px;
 
     --lightest-color: @lightest-color;
@@ -20,9 +25,12 @@ html {
     --secondary-color: @secondary-color;
     --secondary-hover-color: @thirdary-color;
     --darkest-color: @darkest-color;
+    --darkest-color-60: fade(@darkest-color, 60%);
     --red-color: @red;
     --accent-color: @accent;
     --accent-color-70: fade(@accent, 70%);
+
+    --awesome-gray: @awesome-gray;
 }
 
 * {
@@ -38,7 +46,7 @@ body {
     height: 100%;
     background: var(--darkest-color);
     color: var(--lightest-color);
-    font-family: var(--font-primary);
+    font: var(--font-main-text);
 }
 
 .container {
@@ -52,27 +60,26 @@ h2,
 h3 {
     color: var(--lightest-color);
     color: var(--accent-color);
+    color: var(--awesome-gray);
 }
 
 h1 {
-    margin-top: 0;
+    margin-top: 28px;
+    font: var(--font-h1);
 }
 
 h3 {
     margin: 0;
-    margin-bottom: 12px;
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 .btn {
-    padding: 8px 12px;
-    font-size: 14px;
-    line-height: 20px;
+    padding: 8px 24px;
     width: 100%;
     border-radius: 4px;
     cursor: pointer;
-    font-family: var(--font-primary);
+    font: var(--font-btn);
     border-radius: 4px;
 
     &[disabled] {
@@ -97,19 +104,19 @@ h3 {
     }
 
     &--primary-outline {
-        color: var(--secondary-color);
+        color: var(--awesome-gray);
         background: transparent;
-        border: 2px solid var(--secondary-color);
+        border: 2px solid var(--awesome-gray);
 
         &:hover {
-            background: var(--secondary-hover-color);
-            border-color: var(--secondary-hover-color);
-            color: var(--lightest-color);
+            background: var(--awesome-gray);
+            border-color: var(--awesome-gray);
+            color: var(--primary-color);
         }
 
         &:focus:active {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
             color: var(--lightest-color);
         }
     }
@@ -185,25 +192,16 @@ h3 {
 
 .link-primary {
     color: var(--secondary-color);
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    border: 2px solid var(--secondary-color);
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    line-height: 20px;
 
     &:hover {
-        background: var(--secondary-hover-color);
-        border-color: var(--secondary-hover-color);
-        color: var(--lightest-color);
+        color: var(--secondary-hover-color);
     }
 
     &:focus:active {
-        background: var(--primary-color);
-        border-color: var(--primary-color);
-        color: var(--lightest-color);
+        color: var(--primary-color);
     }
 }

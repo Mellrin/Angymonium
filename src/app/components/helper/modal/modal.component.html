@@ -1,7 +1,10 @@
 <ng-container *ngIf="display$ | async as display">
     <section [class.open]="display !== 'close'" (click)="handleClick($event)">
         <div>
-            <button class="close" type="button" (click)="close()">X</button>
+            <button class="close" type="button" (click)="close()">
+                <app-svg-icon icon="cross" [size]="24"></app-svg-icon>
+            </button>
+            <h3>{{modalTitle}}</h3>
             <ng-content></ng-content>
         </div>
     </section>

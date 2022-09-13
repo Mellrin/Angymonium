@@ -1,31 +1,34 @@
 <div class="header">
-    <h1>
-        Your Quest(s)
+    <h1 class="header__title">
+        Workspace
     </h1>
-    <button class="btn btn--primary-outline btn--auto" #submit type="submit" (click)="createQuest()">
+    <button class="btn btn--primary-outline btn--auto" #submit type="submit" (click)="openModal()">
         Create Quest
     </button>
+    <div class="header__description">
+        Here you can manage your Quests.
+    </div>
 </div>
 
-<section *ngIf="quests$ | async as quests">
-    <div *ngFor=" let role of quests" class="dropdown__list-item" [ngClass]="{'status-draft': role.status === 'draft'}">
-        <div class="banner" [ngStyle]="{'background-image': 'url(' + role.banner + ')'}"></div>
-        <div class="banner-content">
+<section *ngIf="quests$ | async as quests" class="quest-section">
+    <div *ngFor="let quest of quests" class="quest-section__item quest"
+        [ngClass]="{'status-draft': quest.status === 'draft'}">
+        <div class="quest__banner" [ngStyle]="{'background-image': 'url(' + quest.banner + ')'}"></div>
+        <div class="quest__hidden-content">
             <p class="rating">
                 <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
-                <span class="rating-number">{{role.rating}}</span>
+                <span class="rating__number">{{quest.rating}}</span>
             </p>
-            <p>{{role.description}}</p>
+            <p>{{quest.description}}</p>
         </div>
-        <div class="content">
-            <h3>{{role.title}}</h3>
-            <app-complexity-level [level]="role.complexity"></app-complexity-level>
+        <div class="quest__header">
+            <h3>{{quest.title}}</h3>
+            <app-complexity-level [level]="quest.complexity"></app-complexity-level>
         </div>
     </div>
 </section>
 
-<app-modal>
-    <h3>Create Quest</h3>
+<app-modal title="Create Quest">
     <form class="form" [formGroup]="questFormGroup" #questForm="ngForm">
 
         <div class="form__field">
@@ -44,6 +47,6 @@
             </div>
         </div>
 
-        <button class="btn btn--sm btn--primary mt-12" #submit type="submit" (click)="create()">Create</button>
+        <button class="btn btn--primary" #submit type="submit" (click)="create()">Create</button>
     </form>
 </app-modal>

@@ -2,10 +2,14 @@
     <nav>
         <ul>
             <ng-container *ngIf="user">
-                <li><a routerLink="/workspace" class="nav-link">Workspace</a></li>
-                <li><a routerLink="/user-list" class="nav-link">User list</a></li>
+                <li><a routerLink="/workspace" routerLinkActive="active" class="nav-link">Workspace</a></li>
+                <li><a routerLink="/user-list" routerLinkActive="active" class="nav-link">User list</a></li>
                 <!-- <li><a routerLink="/profile" class="nav-link"> {{user}} profile</a></li> -->
-                <li><a href="/" (click)="logout()" class="nav-link">Log out</a></li>
+                <li>
+                    <a href="/" (click)="logout()" class="nav-link">
+                        <app-svg-icon icon="logout"></app-svg-icon>
+                    </a>
+                </li>
             </ng-container>
         </ul>
     </nav>

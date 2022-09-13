@@ -31,19 +31,19 @@ import { trigger, style, animate, transition } from '@angular/animations';
   ]
 })
 export class SignFormComponent {
-  trigger: any;
-  @HostBinding('@inOutAnimation') get fn() {
-    return {
-      value: this.trigger,
-      params: {
-        easeTime: this.reverse ? 'translateX(-5px)' : 'translateX(5px)'
-      }
-    }
-  }
+  // trigger: any;
+  // @HostBinding('@inOutAnimation') get fn() {
+  //   return {
+  //     value: this.trigger,
+  //     params: {
+  //       easeTime: this.reverse ? 'translateX(-5px)' : 'translateX(5px)'
+  //     }
+  //   }
+  // }
 
   @ViewChild('submit', { static: true }) button!: ElementRef;
 
-  @HostBinding('class.reverse') @Input() reverse: boolean = false;
+  //@HostBinding('class.reverse') @Input() reverse: boolean = false;
 
   @Output() onSubmitEvent = new EventEmitter<any>();
 
@@ -51,7 +51,6 @@ export class SignFormComponent {
     form_name: '',
     form_group: new FormGroup({}),
     description_heading: '',
-    description_text: '',
     description_btn: { text: '', route: '' }
   }
 

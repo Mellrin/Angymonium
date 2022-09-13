@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -9,6 +9,8 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class ModalComponent {
   display$: Observable<'open' | 'close'> = of('close');
+  @Input() title: string = '';
+  modalTitle: string = '';
 
   constructor(
     public modalService: ModalService,
@@ -17,6 +19,7 @@ export class ModalComponent {
 
   ngOnInit() {
     this.display$ = this.modalService.watch();
+    this.modalTitle = this.title
   }
 
   close() {

@@ -1,24 +1,17 @@
-@form-padding: 80px 40px;
-
 :host {
   display: flex;
-  max-width: 600px;
+  flex-direction: column;
+  max-width: 300px;
   margin: auto;
   width: 100%;
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 3px 1px var(--primary-color);
-
-  &.reverse {
-    flex-direction: row-reverse;
-  }
+  padding: 24px;
 }
 
 .form {
-  flex: 1;
-  padding: @form-padding;
-  margin: 0 auto;
   position: relative;
 
   &__heading {
@@ -29,16 +22,12 @@
 }
 
 .description {
-  background: var(--primary-color);
-  padding: @form-padding;
-  flex-basis: 265px;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 16px;
-  color: var(--lightest-color);
+  margin-top: 8px;
+  text-align: right;
 
-  .form__heading {
-    font-size: 22px;
-    line-height: 26px;
-    color: var(--secondary-color)
+  &__heading {
+    margin-right: 8px;
   }
 }

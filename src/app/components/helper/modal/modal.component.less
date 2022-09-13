@@ -10,13 +10,14 @@ section {
   display: block;
 
   position: absolute;
+  z-index: 100;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 
-  background: rgba(0, 0, 0, 0.2);
-  transition: opacity 250ms ease-in;
+  background: var(--darkest-color-60);
+  transition: opacity .4s ease-in;
 
   >div {
     position: absolute;
@@ -31,7 +32,7 @@ section {
 
     border-radius: 8px;
 
-    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 1px 0 var(--secondary-color);
   }
 
   button.close {
@@ -53,4 +54,8 @@ section {
       color: var(--accent-color);
     }
   }
+}
+
+h3 {
+  margin-bottom: 14px;
 }

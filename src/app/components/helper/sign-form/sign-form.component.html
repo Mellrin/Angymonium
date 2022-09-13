@@ -13,9 +13,10 @@
 
     <button class="btn btn--primary mt-12" #submit type="submit" (click)="onSubmit()">{{form.form_name}}</button>
 </form>
-
 <div class="description">
-    <h3 class="form__heading">{{form.description_heading}}</h3>
-    <p>{{form.description_text}}</p>
-    <a [routerLink]="form.description_btn.route" class="link-primary mt-12" [attr.data-testid]="'link'"> {{form.description_btn.text}}  <app-svg-icon icon="forward"></app-svg-icon></a>
+    <span class="description__heading">{{form.description_heading}}</span>
+    <a [routerLink]="form.description_btn.route" class="link-primary" [attr.data-testid]="'link'">
+        {{form.description_btn.text}}
+        <app-svg-icon icon="forward" [size]="16"></app-svg-icon>
+    </a>
 </div>

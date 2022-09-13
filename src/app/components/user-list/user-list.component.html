@@ -37,14 +37,13 @@
     </tbody>
 </table>
 
-<app-modal>
-    <h3>Update user role</h3>
+<app-modal title="Update user role">
     <div class="subheader">
         for {{user.username}}
     </div>
 
     <app-dropdown [defaultItem]="user.role" [list]="roles$" (onSubmitEvent)="onSubmit($event)"></app-dropdown>
 
-    <button class="btn btn--sm btn--primary mt-12" #submit type="submit" (click)="update()">Update</button>
+    <button class="btn btn--primary mt-12" #submit type="submit" (click)="update()">Update</button>
 
 </app-modal>
