@@ -15,7 +15,7 @@ export class DropdownComponent implements OnInit {
   @Input() defaultItem: ROLE | undefined;
   selectedRole: ROLE | undefined
 
-  @Input() list: Observable<any[]> | undefined;
+  @Input() list!: any[];
   dropdownOpen: boolean = false;
 
   @Output() onSubmitEvent = new EventEmitter<any>();

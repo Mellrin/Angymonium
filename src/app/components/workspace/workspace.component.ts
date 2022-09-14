@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalComponent } from '../helper/modal/modal.component';
+import { getErrorMsg } from '../helper/sign-form/sign-form.component';
 
 @Component({
   selector: 'app-workspace',
@@ -9,6 +11,9 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./workspace.component.less']
 })
 export class WorkspaceComponent implements OnInit {
+  @ViewChild('createQuest', { static: false }) createQuest!: TemplateRef<any>;
+  errorMessage: any = getErrorMsg
+
   questFormGroup: FormGroup;
   quests$: Observable<any[]> = of([
     { title: 'Crazy train', status: 'draft', description: 'lorem ipsum...', rating: 5, complexity: 2, location: '', banner: 'https://static.tildacdn.com/tild3838-3031-4230-b739-653439663337/DJI_0129-min.jpg', host: 'John Dou', eventTime: [{ time: '2022-09-02T19:41:31.986+00:00', booked: true }, { time: '2022-09-02T17:41:31.986+00:00', booked: false }] },
@@ -24,37 +29,14 @@ export class WorkspaceComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() { }
 
   openModal() {
-    this.modalService.open();
+    this.questFormGroup.reset()
+    this.modalService.open(ModalComponent, 'Create Quest', this.createQuest);
   }
 
   create() {
 
   }
-
-  getErrorMsg(x: any) {
-    //console.warn(x.errors)
-    if (x.errors?.backendError) {
-      return x.errors.backendError
-    }
-    if (x.errors?.required) {
-      return 'field is required'
-    }
-    if (x.errors?.minlength) {
-      return `type at least ${x.errors.minlength.requiredLength} characters`
-    }
-
-    if (x.errors?.mismatch) {
-      return 'Password and Confirm Password must be match.'
-    }
-
-    if (x.errors?.pattern) {
-      return `wrong pattern`
-    }
-    return 'error msg'
-  }
-
 }

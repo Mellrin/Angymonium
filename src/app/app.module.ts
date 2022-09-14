@@ -18,6 +18,7 @@ import { DropdownComponent } from './components/helper/dropdown/dropdown.compone
 import { SvgIconComponent } from './components/helper/svg-icon/svg-icon.component';
 import { SafeHTMLPipe } from './pipes/safe-html.pipe';
 import { ComplexityLevelComponent } from './components/helper/complexity-level/complexity-level.component';
+import { SortParamsDirective } from './directives/sort-params.directive';
 @NgModule({
   declarations: [
     RootComponent,
@@ -33,7 +34,8 @@ import { ComplexityLevelComponent } from './components/helper/complexity-level/c
     DropdownComponent,
     SvgIconComponent,
     SafeHTMLPipe,
-    ComplexityLevelComponent
+    ComplexityLevelComponent,
+    SortParamsDirective
   ],
   imports: [
     BrowserModule,

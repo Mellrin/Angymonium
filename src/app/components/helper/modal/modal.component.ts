@@ -1,5 +1,4 @@
-import { Component, ElementRef, Input } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, ElementRef, Input, TemplateRef } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
@@ -8,19 +7,15 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./modal.component.less']
 })
 export class ModalComponent {
-  display$: Observable<'open' | 'close'> = of('close');
-  @Input() title: string = '';
-  modalTitle: string = '';
+  @Input('title') title: string = '';
+  @Input() currentTemplate!: TemplateRef<any>;
 
   constructor(
     public modalService: ModalService,
     private eRef: ElementRef
   ) { }
 
-  ngOnInit() {
-    this.display$ = this.modalService.watch();
-    this.modalTitle = this.title
-  }
+  ngOnInit() {}
 
   close() {
     this.modalService.close();

@@ -6,7 +6,7 @@
                 [ngClass]="{'form-control--error': signForm.submitted && control.value.errors }">
 
             <div class="form__field--error" *ngIf="signForm.submitted && control.value.errors">
-                {{ getErrorMsg(control.value) }}
+                {{ errorMessage(control.value) }}
             </div>
         </div>
     </ng-container>

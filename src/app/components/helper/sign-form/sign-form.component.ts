@@ -2,6 +2,28 @@ import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewCh
 import { FormGroup } from '@angular/forms';
 import { trigger, style, animate, transition } from '@angular/animations';
 
+export function getErrorMsg(x: any) {
+  if (x.errors?.backendError) {
+    return x.errors.backendError
+  }
+  if (x.errors?.required) {
+    return 'field is required'
+  }
+  if (x.errors?.minlength) {
+    return `type at least ${x.errors.minlength.requiredLength} characters`
+  }
+
+  if (x.errors?.mismatch) {
+    return 'Password and Confirm Password must be match.'
+  }
+
+  if (x.errors?.pattern) {
+    return `wrong pattern`
+  }
+
+  return 'error msg'
+}
+
 @Component({
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
@@ -31,6 +53,7 @@ import { trigger, style, animate, transition } from '@angular/animations';
   ]
 })
 export class SignFormComponent {
+  errorMessage: any = getErrorMsg;
   // trigger: any;
   // @HostBinding('@inOutAnimation') get fn() {
   //   return {
@@ -62,28 +85,6 @@ export class SignFormComponent {
 
   getButton() {
     return this.button.nativeElement
-  }
-
-  getErrorMsg(x: any) {
-    //console.warn(x.errors)
-    if (x.errors?.backendError) {
-      return x.errors.backendError
-    }
-    if (x.errors?.required) {
-      return 'field is required'
-    }
-    if (x.errors?.minlength) {
-      return `type at least ${x.errors.minlength.requiredLength} characters`
-    }
-
-    if (x.errors?.mismatch) {
-      return 'Password and Confirm Password must be match.'
-    }
-
-    if (x.errors?.pattern) {
-      return `wrong pattern`
-    }
-    return 'error msg'
   }
 
   keepOrder = (a: any, b: any) => a

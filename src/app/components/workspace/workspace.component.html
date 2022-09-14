@@ -28,14 +28,14 @@
     </div>
 </section>
 
-<app-modal title="Create Quest">
+<ng-template #createQuest>
     <form class="form" [formGroup]="questFormGroup" #questForm="ngForm">
 
         <div class="form__field">
             <input class="form-control" [placeholder]="'title' | placeholder" formControlName="title">
 
             <div class="form__field--error" *ngIf="questForm.submitted && questFormGroup.get('title')?.errors">
-                {{ getErrorMsg(questFormGroup.get('title')) }}
+                {{ errorMessage(questFormGroup.get('title')) }}
             </div>
         </div>
 
@@ -43,10 +43,10 @@
             <textarea class="form-control" name="description" id="description" rows="1"
                 [placeholder]="'description' | placeholder " formControlName="description"></textarea>
             <div class="form__field--error" *ngIf="questForm.submitted && questFormGroup.get('description')?.errors">
-                {{ getErrorMsg(questFormGroup.get('description')) }}
+                {{ errorMessage(questFormGroup.get('description')) }}
             </div>
         </div>
 
         <button class="btn btn--primary" #submit type="submit" (click)="create()">Create</button>
     </form>
-</app-modal>
+</ng-template>

@@ -1,4 +1,4 @@
-<div class="dropdown" *ngIf="list | async as roles">
+<div class="dropdown">
 
     <div class="dropdown__value">
         {{ selectedRole?.title || defaultItem?.title}}
@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="dropdown__list" *ngIf="dropdownOpen &&  roles.length">
-        <div *ngFor="let role of roles" class="dropdown__list-item" (click)="onSubmit(role)">{{role.title}}</div>
+    <div class="dropdown__list" *ngIf="dropdownOpen">
+        <div *ngFor="let role of list" class="dropdown__list-item" (click)="onSubmit(role)">{{role.title}}</div>
     </div>
 </div>

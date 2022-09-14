@@ -39,15 +39,15 @@ describe('SignFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should not render reverse class by default', () => {
-    expect(fixture.nativeElement.classList.contains('reverse')).toBeFalse();
-  });
+  // it('should not render reverse class by default', () => {
+  //   expect(fixture.nativeElement.classList.contains('reverse')).toBeFalse();
+  // });
 
-  it('should render reverse class', () => {
-    component.reverse = true;
-    fixture.detectChanges();
-    expect(fixture.nativeElement.classList.contains('reverse')).toBeTrue();
-  });
+  // it('should render reverse class', () => {
+  //   component.reverse = true;
+  //   fixture.detectChanges();
+  //   expect(fixture.nativeElement.classList.contains('reverse')).toBeTrue();
+  // });
 
   it('should render form name in a h2 tag', () => {
     const compiled = fixture.debugElement.nativeElement;

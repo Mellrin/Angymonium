@@ -11,12 +11,30 @@
     <thead>
         <tr>
             <th>№</th>
-            <th *ngFor="let col of config">{{col.colname}}</th>
+            <th *ngFor="let col of config">
+                {{col.colname}}
+                <div class="sorting">
+                    <span appSortParams (param)="setSortParams($event)" [id]="col.colname + 'Asc'"
+                        *ngIf="col.colname !== column">
+                        <app-svg-icon icon="arrowUp" [size]="10"></app-svg-icon>
+                    </span>
+                    <span appSortParams (param)="setSortParams($event)" [id]="col.colname + 'Desc'"
+                        *ngIf="col.colname !== column">
+                        <app-svg-icon icon="arrowDown" [size]="10"></app-svg-icon>
+                    </span>
+
+                    <span *ngIf="col.colname == column" appSortParams (param)="setSortParams($event)"
+                        [id]="direction === 'asc' ? col.colname + 'Desc' : col.colname + 'Asc'">
+                        <app-svg-icon icon="arrowDown" *ngIf="direction === 'asc'"  [size]="14"></app-svg-icon>
+                        <app-svg-icon icon="arrowUp" *ngIf="direction === 'desc'"  [size]="14"></app-svg-icon>
+                    </span>
+                </div>
+            </th>
             <th>actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users | sortByRole; let i = index">
+        <tr *ngFor="let user of users | sortByRole:direction:column:type; let i = index">
             <td>{{i + 1}}</td>
             <td *ngFor="let col of config">
                 <ng-container [ngSwitch]="col.type">
@@ -30,20 +48,22 @@
                 </ng-container>
             </td>
             <td>
-                <button class="btn btn--primary-outline btn--sm" (click)="updatePrivileges(user)">Update
-                    privileges</button>
+                <button class="btn btn--primary-outline btn--sm" (click)="updatePrivileges(user)">
+                    Update privileges
+                </button>
             </td>
         </tr>
     </tbody>
 </table>
 
-<app-modal title="Update user role">
+<ng-template #updateUserRole *ngIf="roles$ | async as roles">
+
     <div class="subheader">
         for {{user.username}}
     </div>
 
-    <app-dropdown [defaultItem]="user.role" [list]="roles$" (onSubmitEvent)="onSubmit($event)"></app-dropdown>
+    <app-dropdown [defaultItem]="user.role" [list]="roles" (onSubmitEvent)="onSubmit($event)"></app-dropdown>
 
     <button class="btn btn--primary mt-12" #submit type="submit" (click)="update()">Update</button>
 
-</app-modal>
+</ng-template>

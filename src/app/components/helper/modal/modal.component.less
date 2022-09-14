@@ -1,11 +1,4 @@
-section {
-  visibility: hidden;
-  opacity: 0;
-
-  &.open {
-    visibility: inherit;
-    opacity: 1;
-  }
+.overlay {
 
   display: block;
 
@@ -19,7 +12,7 @@ section {
   background: var(--darkest-color-60);
   transition: opacity .4s ease-in;
 
-  >div {
+  .modal {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -27,35 +20,33 @@ section {
 
     width: 300px;
 
-    background: var(--darkest-color);
+    background: var(--primary-dark-color);
     padding: 20px 36px;
 
     border-radius: 8px;
 
     box-shadow: 0 0 1px 0 var(--secondary-color);
-  }
 
-  button.close {
-    background: none;
-    color: inherit;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    font-size: 14px;
-    line-height: 20px;
+    &__title {
+      margin-bottom: 14px;
+    }
 
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    &__close {
+      background: none;
+      color: inherit;
+      border: none;
+      cursor: pointer;
+      outline: none;
 
-    padding: 4px 10px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
 
-    &:hover {
-      color: var(--accent-color);
+      padding: 4px 10px;
+
+      &:hover {
+        color: var(--accent-color);
+      }
     }
   }
-}
-
-h3 {
-  margin-bottom: 14px;
 }
