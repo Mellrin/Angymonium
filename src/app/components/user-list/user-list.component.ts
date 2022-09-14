@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, catchError, noop, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, delay, noop, Observable, of, switchMap, tap } from 'rxjs';
 import { userItem } from 'src/app/pipes/sort-by-pipe.pipe';
 import { ModalService } from 'src/app/services/modal.service';
 import { UserService } from 'src/app/services/user.service';
@@ -34,6 +34,8 @@ export class UserListComponent implements OnInit {
     { colname: 'registrationDate', type: 'datetime', width: '160px' }
   ];
 
+  loading: boolean = true;
+
   constructor(
     private userServce: UserService,
     private modalService: ModalService
@@ -41,7 +43,8 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.userList$ = this.refreshUsers$.pipe(
-      switchMap(_ => this.userServce.getAllUsers().pipe()),
+      delay(2000),
+      switchMap(_ => this.userServce.getAllUsers().pipe(tap(_ => this.loading = false),)),
     );
 
     this.roles$ = this.userServce.getAllRoles();

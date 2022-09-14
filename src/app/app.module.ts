@@ -19,6 +19,7 @@ import { SvgIconComponent } from './components/helper/svg-icon/svg-icon.componen
 import { SafeHTMLPipe } from './pipes/safe-html.pipe';
 import { ComplexityLevelComponent } from './components/helper/complexity-level/complexity-level.component';
 import { SortParamsDirective } from './directives/sort-params.directive';
+import { SpinnerComponent } from './components/helper/spinner/spinner.component';
 @NgModule({
   declarations: [
     RootComponent,
@@ -35,7 +36,8 @@ import { SortParamsDirective } from './directives/sort-params.directive';
     SvgIconComponent,
     SafeHTMLPipe,
     ComplexityLevelComponent,
-    SortParamsDirective
+    SortParamsDirective,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,8 @@
     User list
 </h1>
 
+<app-spinner *ngIf="loading"></app-spinner>
+
 <table *ngIf="userList$ | async as users">
     <colgroup>
         <col style="width: 20px;">
@@ -25,8 +27,8 @@
 
                     <span *ngIf="col.colname == column" appSortParams (param)="setSortParams($event)"
                         [id]="direction === 'asc' ? col.colname + 'Desc' : col.colname + 'Asc'">
-                        <app-svg-icon icon="arrowDown" *ngIf="direction === 'asc'"  [size]="14"></app-svg-icon>
-                        <app-svg-icon icon="arrowUp" *ngIf="direction === 'desc'"  [size]="14"></app-svg-icon>
+                        <app-svg-icon icon="arrowDown" *ngIf="direction === 'asc'" [size]="14"></app-svg-icon>
+                        <app-svg-icon icon="arrowUp" *ngIf="direction === 'desc'" [size]="14"></app-svg-icon>
                     </span>
                 </div>
             </th>
