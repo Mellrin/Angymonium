@@ -3,7 +3,13 @@
 </h1>
 
 <app-spinner *ngIf="loading"></app-spinner>
-
+<div class="form__field search-field">
+    <app-svg-icon icon="search" [size]="16" class="search-field__search-icon"></app-svg-icon>
+    <input class="form-control" placeholder="Search...">
+    <button class="btn btn--primary btn--sm search-field__filter-btn">
+        <app-svg-icon icon="filter" [size]="16"></app-svg-icon>
+    </button>
+</div>
 <table *ngIf="userList$ | async as users">
     <colgroup>
         <col style="width: 20px;">

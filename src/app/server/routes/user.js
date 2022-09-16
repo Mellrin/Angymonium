@@ -34,6 +34,7 @@ router.post('/create', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
+        const role = await Role.findById(user.role._id);
 
         if (user === null) {
             return res.status(404).json({
@@ -44,7 +45,8 @@ router.post('/login', async (req, res) => {
 
         if (await bcrypt.compare(req.body.password, user.password)) {
             req.session.username = user.username;
-            res.status(200).json({ username: req.session.username })
+            req.session.isAdmin = role.title === 'admin';
+            res.status(200).json({ username: req.session.username, isAdmin: role.title === 'admin' })
         } else {
             return res.status(401).json({
                 error: 'Wrong password',

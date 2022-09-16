@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { filter, noop, Observable, Subject, tap } from 'rxjs';
+import { catchError, filter, noop, Observable, of, Subject, tap } from 'rxjs';
 
 
 export interface User {
@@ -30,6 +30,7 @@ export class UserService {
   public getUserSession() {
     return this.http.get<IUser>('/api/user/session')
       .pipe(
+        catchError(e => of(e)),
         filter(res => Object.keys(res).length !== 0),
         tap(res => this.currentUser$.next(res)),
       )

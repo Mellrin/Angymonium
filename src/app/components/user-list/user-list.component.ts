@@ -43,7 +43,6 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.userList$ = this.refreshUsers$.pipe(
-      delay(2000),
       switchMap(_ => this.userServce.getAllUsers().pipe(tap(_ => this.loading = false),)),
     );
 
