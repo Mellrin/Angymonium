@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./model/user');
+const Role = require('./model/role');
 
 const url = 'mongodb://localhost/wunderbase';
 
@@ -22,6 +23,16 @@ app.use(session({
     resave: true
 }));
 
+const roleRoute = require('./routes/role')
+const userRoute = require('./routes/user')
+const questRoute = require('./routes/quest')
+
+app.use('/api/roles', roleRoute)
+
+app.use('/api/user', userRoute)
+
+app.use('/api/quest', questRoute)
+
 app.get('/api/user/logout', (req, res) => {
     req.session.destroy();
     res.json({})
@@ -32,63 +43,13 @@ app.get('/api/user/session', async (req, res) => {
     await req.session.username ? res.status(200).send({ username: req.session.username, isAdmin: req.session.isAdmin }) : res.json({});
 });
 
-app.post('/api/user/login', async (req, res) => {
-    try {
-        const user = await User.findOne({ email: req.body.email });
-
-        if (user === null) {
-            return res.status(404).json({
-                error: 'No such email exists',
-                field: 'email'
-            })
-        }
-
-        if (await bcrypt.compare(req.body.password, user.password)) {
-            req.session.username = user.username;
-            res.status(200).json({ username: req.session.username })
-        } else {
-            return res.status(401).json({
-                error: 'Wrong password',
-                field: 'password'
-            })
-        }
-
-    } catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-})
-
-app.post('/api/user/signup', async (req, res) => {
-    try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        const user = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: hashedPassword
-        })
-        const newUser = await user.save();
-        req.session.username = req.body.username;
-        res.status(201).json(newUser)
-    } catch (err) {
-        if (err.code === 11000) {
-            res.status(400).json({
-                error: 'Such user already exists',
-                field: Object.keys(err.keyPattern)[0]
-            })
-        } else {
-            res.status(400).json({ message: err.message })
-        }
-    }
-})
-
 app.get('/api/users', async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find().populate('role').exec();
         res.json(users);
     } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
-
 
 app.listen(3000, () => console.log('Server running on port 3000!'))

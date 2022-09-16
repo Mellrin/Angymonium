@@ -1,0 +1,14 @@
+<div class="dropdown">
+
+    <div class="dropdown__value">
+        {{ selectedRole?.title || defaultItem?.title}}
+        <div class="svg">
+            <app-svg-icon icon="arrowDown" *ngIf="!dropdownOpen"></app-svg-icon>
+            <app-svg-icon icon="arrowUp" *ngIf="dropdownOpen"></app-svg-icon>
+        </div>
+    </div>
+
+    <div class="dropdown__list" *ngIf="dropdownOpen">
+        <div *ngFor="let role of list" class="dropdown__list-item" (click)="onSubmit(role)">{{role.title}}</div>
+    </div>
+</div>

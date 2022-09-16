@@ -1,0 +1,9 @@
+<section class="overlay" (click)="handleClick($event)">
+    <div class="modal">
+        <button class="modal__close" type="button" (click)="close()">
+            <app-svg-icon icon="cross" [size]="24"></app-svg-icon>
+        </button>
+        <h3 class="modal__title">{{title}}</h3>
+        <ng-container [ngTemplateOutlet]="currentTemplate"></ng-container>
+    </div>
+</section>

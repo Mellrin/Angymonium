@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styles: [':host {align-self: center}']
+  styles: [':host {align-self: center; margin: auto; flex: 1;}']
 })
 export class LoginComponent implements AfterViewInit, OnDestroy {
   form = {
@@ -18,7 +18,6 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
       password: new FormControl('', [Validators.required]),
     }),
     description_heading: "Don't have an account yet?",
-    description_text: 'Enter your personal info to keep connection with us.',
     description_btn: { text: 'Sign up', route: '/user/signup' },
   }
 

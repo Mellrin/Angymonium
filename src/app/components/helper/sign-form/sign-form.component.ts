@@ -2,6 +2,28 @@ import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewCh
 import { FormGroup } from '@angular/forms';
 import { trigger, style, animate, transition } from '@angular/animations';
 
+export function getErrorMsg(x: any) {
+  if (x.errors?.backendError) {
+    return x.errors.backendError
+  }
+  if (x.errors?.required) {
+    return 'field is required'
+  }
+  if (x.errors?.minlength) {
+    return `type at least ${x.errors.minlength.requiredLength} characters`
+  }
+
+  if (x.errors?.mismatch) {
+    return 'Password and Confirm Password must be match.'
+  }
+
+  if (x.errors?.pattern) {
+    return `wrong pattern`
+  }
+
+  return 'error msg'
+}
+
 @Component({
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
@@ -31,19 +53,20 @@ import { trigger, style, animate, transition } from '@angular/animations';
   ]
 })
 export class SignFormComponent {
-  trigger: any;
-  @HostBinding('@inOutAnimation') get fn() {
-    return {
-      value: this.trigger,
-      params: {
-        easeTime: this.reverse ? 'translateX(-5px)' : 'translateX(5px)'
-      }
-    }
-  }
+  errorMessage: any = getErrorMsg;
+  // trigger: any;
+  // @HostBinding('@inOutAnimation') get fn() {
+  //   return {
+  //     value: this.trigger,
+  //     params: {
+  //       easeTime: this.reverse ? 'translateX(-5px)' : 'translateX(5px)'
+  //     }
+  //   }
+  // }
 
   @ViewChild('submit', { static: true }) button!: ElementRef;
 
-  @HostBinding('class.reverse') @Input() reverse: boolean = false;
+  //@HostBinding('class.reverse') @Input() reverse: boolean = false;
 
   @Output() onSubmitEvent = new EventEmitter<any>();
 
@@ -51,7 +74,6 @@ export class SignFormComponent {
     form_name: '',
     form_group: new FormGroup({}),
     description_heading: '',
-    description_text: '',
     description_btn: { text: '', route: '' }
   }
 
@@ -63,28 +85,6 @@ export class SignFormComponent {
 
   getButton() {
     return this.button.nativeElement
-  }
-
-  getErrorMsg(x: any) {
-    //console.warn(x.errors)
-    if (x.errors?.backendError) {
-      return x.errors.backendError
-    }
-    if (x.errors?.required) {
-      return 'field is required'
-    }
-    if (x.errors?.minlength) {
-      return `type at least ${x.errors.minlength.requiredLength} characters`
-    }
-
-    if (x.errors?.mismatch) {
-      return 'Password and Confirm Password must be match.'
-    }
-
-    if (x.errors?.pattern) {
-      return `wrong pattern`
-    }
-    return 'error msg'
   }
 
   keepOrder = (a: any, b: any) => a

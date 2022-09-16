@@ -10,8 +10,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PlaceholderPipe } from './components/helper/placeholder.pipe';
-
+import { PlaceholderPipe } from './pipes/placeholder.pipe';
+import { ModalComponent } from './components/helper/modal/modal.component';
+import { SortByRolePipe } from './pipes/sort-by-pipe.pipe';
+import { WorkspaceComponent } from './components/workspace/workspace.component';
+import { DropdownComponent } from './components/helper/dropdown/dropdown.component';
+import { SvgIconComponent } from './components/helper/svg-icon/svg-icon.component';
+import { SafeHTMLPipe } from './pipes/safe-html.pipe';
+import { ComplexityLevelComponent } from './components/helper/complexity-level/complexity-level.component';
+import { SortParamsDirective } from './directives/sort-params.directive';
+import { SpinnerComponent } from './components/helper/spinner/spinner.component';
 @NgModule({
   declarations: [
     RootComponent,
@@ -20,7 +28,16 @@ import { PlaceholderPipe } from './components/helper/placeholder.pipe';
     LandingComponent,
     SignFormComponent,
     UserListComponent,
-    PlaceholderPipe
+    PlaceholderPipe,
+    ModalComponent,
+    SortByRolePipe,
+    WorkspaceComponent,
+    DropdownComponent,
+    SvgIconComponent,
+    SafeHTMLPipe,
+    ComplexityLevelComponent,
+    SortParamsDirective,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
