@@ -5,7 +5,7 @@
 table {
     border-collapse: collapse;
     margin-bottom: 20px;
-    border: 1px solid var(--primary-dark-color);
+    border: 1px solid var(--modal-bg-color);
 
     width: 100%;
 
@@ -15,7 +15,7 @@ table {
             text-align: left;
             padding: 8px;
             text-transform: uppercase;
-            background: var(--primary-dark-color);
+            background: var(--modal-bg-color);
 
             .sorting {
                 display: inline-block;
@@ -37,7 +37,7 @@ table {
     }
 
     tr:nth-child(even) {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--table-bg-10);
     }
 
 }
@@ -53,12 +53,13 @@ table {
 .role {
     &-basic {
         .role;
-        background: var(--primary-color);
+        background: var(--modal-bg-color);
     }
 
     &-admin {
         .role;
-        background: var(--accent-color-70);
+        background: var(--heading-color);
+        color: var(--modal-bg-color);
     }
 }
 

@@ -1,15 +1,12 @@
 .overlay {
-
   display: block;
-
   position: absolute;
   z-index: 100;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-
-  background: var(--darkest-color-60);
+  background: var(--overlay-color);
   transition: opacity .4s ease-in;
 
   .modal {
@@ -17,15 +14,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     width: 300px;
-
-    background: var(--primary-dark-color);
+    background: var(--modal-bg-color);
     padding: 20px 36px;
-
     border-radius: 8px;
 
-    box-shadow: 0 0 1px 0 var(--secondary-color);
+    //box-shadow: 0 0 1px 0 var(--secondary-color);
 
     &__title {
       margin-bottom: 14px;
@@ -37,11 +31,9 @@
       border: none;
       cursor: pointer;
       outline: none;
-
       position: absolute;
       top: 10px;
       right: 10px;
-
       padding: 4px 10px;
 
       &:hover {

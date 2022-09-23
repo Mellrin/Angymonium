@@ -6,7 +6,12 @@
                 <li><a routerLink="/user-list" routerLinkActive="active" class="nav-link">User list</a></li>
                 <!-- <li><a routerLink="/profile" class="nav-link"> {{user}} profile</a></li> -->
                 <li>
-                    <a href="/" (click)="logout()" class="nav-link">
+                    <a href="/" class="nav-link" (click)="toggleTheme($event)">
+                        <app-svg-icon [icon]="themeIcon" [size]="24"></app-svg-icon>
+                    </a>
+                </li>
+                <li>
+                    <a href="/" (click)="logout($event)" class="nav-link">
                         <app-svg-icon icon="logout" [size]="24"></app-svg-icon>
                     </a>
                 </li>
