@@ -36,7 +36,7 @@
 }
 
 .quest {
-    background: var(--primary-color);
+    background: var(--modal-bg-color);
     border-radius: 8px;
     position: relative;
     overflow: hidden;
@@ -45,7 +45,7 @@
         &:before {
             content: 'Draft';
             padding: 6px 24px;
-            background: var(--awesome-gray);
+            background: var(--modal-bg-color);
             position: absolute;
             top: -7px;
             right: -6px;
@@ -88,7 +88,7 @@
 
     &:hover {
         cursor: pointer;
-        box-shadow: 0 0 3px 1px var(--primary-color);
+        //box-shadow: 0 0 3px 1px var(--modal-bg-color);
 
         .quest__banner {
             filter: brightness(0.6)
@@ -103,7 +103,7 @@
 .rating {
     display: flex;
     align-items: center;
-    color: var(--accent-color);
+    color: var(--orange-color);
 
     &__number {
         margin-left: 4px;
