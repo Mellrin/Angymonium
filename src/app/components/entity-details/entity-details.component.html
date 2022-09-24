@@ -1,0 +1,15 @@
+<h1>{{quest.title}}</h1><span *ngIf="quest.status === 'draft'">{{quest.status}}</span>
+
+<p>
+    Feedback
+    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>{{quest.rating}}
+</p>
+<p>{{quest.description}}</p>
+
+<p>
+    <app-svg-icon icon="key" [size]="18"></app-svg-icon>{{quest.complexity}}
+</p>
+
+<div>
+    <img [src]="quest.banner" alt="banner" width="350">
+</div>

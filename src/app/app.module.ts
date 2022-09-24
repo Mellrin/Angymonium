@@ -20,6 +20,7 @@ import { SafeHTMLPipe } from './pipes/safe-html.pipe';
 import { ComplexityLevelComponent } from './components/helper/complexity-level/complexity-level.component';
 import { SortParamsDirective } from './directives/sort-params.directive';
 import { SpinnerComponent } from './components/helper/spinner/spinner.component';
+import { EntityDetailsComponent } from './components/entity-details/entity-details.component';
 @NgModule({
   declarations: [
     RootComponent,
@@ -37,7 +38,8 @@ import { SpinnerComponent } from './components/helper/spinner/spinner.component'
     SafeHTMLPipe,
     ComplexityLevelComponent,
     SortParamsDirective,
-    SpinnerComponent
+    SpinnerComponent,
+    EntityDetailsComponent
   ],
   imports: [
     BrowserModule,

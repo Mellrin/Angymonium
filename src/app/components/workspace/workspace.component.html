@@ -13,7 +13,9 @@
 <section *ngIf="quests$ | async as quests" class="quest-section">
     <div *ngFor="let quest of quests" class="quest-section__item quest"
         [ngClass]="{'status-draft': quest.status === 'draft'}">
-        <div class="quest__banner" [ngStyle]="{'background-image': 'url(' + quest.banner + ')'}"></div>
+        <div class="quest__banner" [ngStyle]="{'background-image': 'url(' + quest.banner + ')'}">
+            <a routerLink="/entity/{{quest.id}}" class="quest-link"></a>
+        </div>
         <div class="quest__hidden-content">
             <p class="rating">
                 <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
