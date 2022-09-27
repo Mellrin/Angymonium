@@ -72,4 +72,8 @@ export class UserListComponent implements OnInit {
     this.type = param.typ;
   }
 
+  openFilterDlg() {
+    this.modalService.open(ModalComponent, 'Will be implemented soon', null);
+  }
+
 }

@@ -233,3 +233,18 @@ h3 {
         color: var(--primary-bg-color-focus);
     }
 }
+
+.link-accent {
+    color: var(--orange-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    &:hover {
+        color: darken(@orange, 10%);
+    }
+
+    &:focus:active {
+        color: darken(@orange, 20%);
+    }
+}

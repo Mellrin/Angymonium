@@ -11,10 +11,10 @@ import { AbstractQuestService } from 'src/app/services/abstract-quest.service';
 export class EntityDetailsComponent implements OnInit {
   quest!: customQuest;
   id!: number;
+  date: Date = new Date("2020-05-12T23:50:21.817Z");
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private questService: AbstractQuestService
   ) { }
 
@@ -24,8 +24,8 @@ export class EntityDetailsComponent implements OnInit {
     this.questService.getQuestById(this.id)
       .subscribe((res: customQuest) => this.quest = res);
   }
-  goToAnchor1(){
-    this.router.navigate(['/entity/', this.id], { fragment: 'feedback' });
+  scrollToIdRef(e: Event, element: any){
+    e.preventDefault()
+    element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
-
 }
