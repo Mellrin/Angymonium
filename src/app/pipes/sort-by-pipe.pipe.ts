@@ -1,14 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-export interface userItem {
-  email: string,
-  password: string,
-  permissions?: any,
-  registrationDate: Date,
-  role: { _id: string, title: string },
-  username: string,
-  _id: string
-}
+import { userItem } from '../models/user.model';
 
 @Pipe({
   name: 'sortByRole'

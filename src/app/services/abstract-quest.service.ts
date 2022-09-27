@@ -9,7 +9,7 @@ import { MockedQuestService } from './mocked-quest.service';
   useClass: forwardRef(() => MockedQuestService)
 })
 export abstract class AbstractQuestService {
-  public abstract getQuests(): Observable<any[]>;
-  public abstract getQuestById(id: number): Observable<any>;
-  public abstract addQuest(quest: any): Observable<any>;
+  public abstract getQuests(): Observable<customQuest[]>;
+  public abstract getQuestById(id: number): Observable<customQuest>;
+  public abstract addQuest(quest: customQuest): Observable<customQuest>;
 }

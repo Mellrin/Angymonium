@@ -64,7 +64,7 @@ export class SignFormComponent {
   //   }
   // }
 
-  @ViewChild('submit', { static: true }) button!: ElementRef;
+  // @ViewChild('submit', { static: true }) button!: ElementRef;
 
   //@HostBinding('class.reverse') @Input() reverse: boolean = false;
 
@@ -83,9 +83,9 @@ export class SignFormComponent {
     this.onSubmitEvent.emit();
   }
 
-  getButton() {
-    return this.button.nativeElement
-  }
+  // getButton() {
+  //   return this.button.nativeElement
+  // }
 
   keepOrder = (a: any, b: any) => a
 

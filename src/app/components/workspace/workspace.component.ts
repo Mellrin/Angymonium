@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, noop, Observable, of, switchMap, tap } from 'rxjs';
 import { customQuest } from 'src/app/models/quest.model';
 import { AbstractQuestService } from 'src/app/services/abstract-quest.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -18,10 +18,11 @@ export class WorkspaceComponent implements OnInit {
 
   questFormGroup: FormGroup;
   quests$!: Observable<customQuest[]>
+  refreshToken$ = new BehaviorSubject<boolean>(true);
 
   constructor(
     private modalService: ModalService,
-    private questService: AbstractQuestService
+    private questService: AbstractQuestService,
   ) {
     this.questFormGroup = new FormGroup({
       title: new FormControl(null, [Validators.required]),
@@ -30,7 +31,9 @@ export class WorkspaceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.quests$ = this.questService.getQuests()
+    this.quests$ = this.refreshToken$.pipe(
+      switchMap(_ => this.questService.getQuests().pipe()),
+    );
   }
 
   openModal() {
@@ -39,15 +42,16 @@ export class WorkspaceComponent implements OnInit {
   }
 
   create() {
-    const obj = {
-      title: this.questFormGroup.get('title')?.value,
-      description: this.questFormGroup.get('description')?.value
-    }
-
+    console.warn(this.questFormGroup)
+ 
     if (Object.values(this.questFormGroup.controls).every(val => !val.errors)) {
-      this.questService.addQuest(obj)
+      this.questService.addQuest(this.questFormGroup.value)
+        .pipe(
+          catchError(e => of(e)),
+          tap(_ => (this.refreshToken$.next(true), this.modalService.close()))
+        )
+        .subscribe(noop)
     }
 
-    console.warn(this.questService.getQuests())
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, catchError, delay, noop, Observable, of, switchMap, tap } from 'rxjs';
-import { userItem } from 'src/app/pipes/sort-by-pipe.pipe';
+import { userItem } from 'src/app/models/user.model';
+
 import { ModalService } from 'src/app/services/modal.service';
 import { UserService } from 'src/app/services/user.service';
 import { ModalComponent } from '../helper/modal/modal.component';
@@ -15,12 +16,10 @@ export class UserListComponent implements OnInit {
   @ViewChild('updateUserRole', { static: false }) updateUserRole!: TemplateRef<any>;
 
   userList$!: Observable<userItem[]>;
-  roles$!: Observable<any[]>;
+  roles$!: Observable<userItem["role"][]>;
   refreshUsers$ = new BehaviorSubject<boolean>(true);
 
-  user: { username: string, role: { title: string, _id: string } } = {
-    username: '', role: { title: '', _id: '' }
-  };
+  selectedUser!: userItem;
 
   searchTerm: string = '';
   direction: string = 'asc';
@@ -49,14 +48,13 @@ export class UserListComponent implements OnInit {
     this.roles$ = this.userServce.getAllRoles();
   }
 
-  updatePrivileges(col: any) {
-    this.user.username = col.username
-    this.user.role = col.role
+  updatePrivileges(col: userItem) {
+    this.selectedUser = col
     this.modalService.open(ModalComponent, 'Update User Role', this.updateUserRole);
   }
 
   update() {
-    this.userServce.updateUser(this.user)
+    this.userServce.updateUser(this.selectedUser)
       .pipe(
         catchError(e => of(e)),
         tap(_ => (this.refreshUsers$.next(true), this.modalService.close()))
@@ -64,8 +62,8 @@ export class UserListComponent implements OnInit {
       .subscribe(noop)
   }
 
-  onSubmit(item: any) {
-    this.user.role = item;
+  onSubmit(item: userItem['role']) {
+    this.selectedUser.role = item;
   }
 
   setSortParams(param: any) {

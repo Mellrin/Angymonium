@@ -19,4 +19,4 @@ export const AppRoutes: Routes = [
   { path: '**', component: LandingComponent },
 ];
 
-export const ROUTING: ModuleWithProviders<any> = RouterModule.forRoot(AppRoutes);
+export const ROUTING: ModuleWithProviders<any> = RouterModule.forRoot(AppRoutes, { anchorScrolling: 'enabled' });

@@ -31,7 +31,7 @@
 </section>
 
 <ng-template #createQuest>
-    <form class="form" [formGroup]="questFormGroup" #questForm="ngForm">
+    <form class="form" [formGroup]="questFormGroup" #questForm="ngForm" (ngSubmit)="create()">
 
         <div class="form__field">
             <input class="form-control" [placeholder]="'title' | placeholder" formControlName="title">
@@ -49,6 +49,6 @@
             </div>
         </div>
 
-        <button class="btn btn--primary" #submit type="submit" (click)="create()">Create</button>
+        <button class="btn btn--primary" #submit type="submit">Create</button>
     </form>
 </ng-template>

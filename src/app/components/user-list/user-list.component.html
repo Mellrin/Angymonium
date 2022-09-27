@@ -67,10 +67,10 @@
 <ng-template #updateUserRole *ngIf="roles$ | async as roles">
 
     <div class="subheader">
-        for {{user.username}}
+        for {{selectedUser.username}}
     </div>
 
-    <app-dropdown [defaultItem]="user.role" [list]="roles" (onSubmitEvent)="onSubmit($event)"></app-dropdown>
+    <app-dropdown [defaultItem]="selectedUser.role" [list]="roles" (onSubmitEvent)="onSubmit($event)"></app-dropdown>
 
     <button class="btn btn--primary mt-12" #submit type="submit" (click)="update()">Update</button>
 

@@ -1,7 +1,6 @@
-import { Component, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { SignFormComponent } from '../helper/sign-form/sign-form.component';
-import { fromEvent, Subscription, filter, switchMap, catchError, of } from 'rxjs';
+import { Subscription, catchError, of } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './signup.component.html',
   styles: [':host {align-self: center; margin: auto; flex: 1;}']
 })
-export class SignupComponent implements AfterViewInit, OnDestroy {
+export class SignupComponent implements OnDestroy {
   emailPattern: string = "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w{2,}([-.]\\w+)*$";
   form = {
     form_name: 'Sign up',
@@ -24,9 +23,6 @@ export class SignupComponent implements AfterViewInit, OnDestroy {
     description_btn: { text: 'Sign in', route: '/user/signin' },
   }
 
-
-  @ViewChild(SignFormComponent)
-  child!: SignFormComponent;
   subscription: Subscription = new Subscription;
 
   constructor(
@@ -34,15 +30,11 @@ export class SignupComponent implements AfterViewInit, OnDestroy {
     private router: Router,
   ) { }
 
-  ngAfterViewInit() {
-    this.subscription =
-      fromEvent(this.child.getButton(), 'click')
-        .pipe(
-          filter(_ => Object.values(this.form.form_group.controls).every(val => !val.errors)),
-          switchMap(_ => this.userService.submitSignup({ email: this.form.form_group.get('email')?.value, username: this.form.form_group.get('username')?.value, password: this.form.form_group.get('password')?.value }).pipe(catchError(e => of(e))))
-        )
+  onSubmit() {
+    if (this.form.form_group.valid) {
+      this.subscription = this.userService.submitSignup(this.form.form_group.value)
+        .pipe(catchError(e => of(e)))
         .subscribe((res) => {
-          // console.log(res)
           if (res.error) {
             this.form.form_group.controls[`${res?.error.field}`].setErrors({ backendError: res?.error.error });
             return
@@ -51,10 +43,7 @@ export class SignupComponent implements AfterViewInit, OnDestroy {
           this.userService.currentUser$.next(res);
           this.router.navigate(['/home']);
         })
-  }
-
-  onSubmit() {
-    console.warn('up')
+    }
   }
 
   ngOnDestroy() {

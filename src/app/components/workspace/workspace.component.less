@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 28px;
+    margin-bottom: 8px;
 
     &__description {
         flex-basis: 100%;
@@ -23,11 +23,13 @@
 
 .quest-section {
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 20px;
 
     &__item {
-        flex: 0 0 33%;
+        flex: 0 0 calc(33% - 10px);
         margin-right: 20px;
+        margin-top: 20px;
 
         &:nth-child(2n + 3) {
             margin-right: 0;

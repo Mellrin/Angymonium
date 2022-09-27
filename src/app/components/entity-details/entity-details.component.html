@@ -1,15 +1,59 @@
-<h1>{{quest.title}}</h1><span *ngIf="quest.status === 'draft'">{{quest.status}}</span>
+<div class="entity-details__main">
 
-<p>
-    Feedback
-    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>{{quest.rating}}
-</p>
-<p>{{quest.description}}</p>
+    <h1>
+        {{quest.title}}
+        <span *ngIf="quest.status === 'draft'" class="label">{{quest.status}}</span>
+    </h1>
 
-<p>
-    <app-svg-icon icon="key" [size]="18"></app-svg-icon>{{quest.complexity}}
-</p>
+    <div>
+        <a (click)="goToAnchor1()" class="link-primary">
+            Feedback
+            <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>{{quest.rating}}
+        </a>
+    </div>
 
-<div>
-    <img [src]="quest.banner" alt="banner" width="350">
+
+    <p>
+        complexity: <app-complexity-level [level]="quest.complexity"></app-complexity-level>
+    </p>
+
+    <p>{{quest.description}}</p>
+
+    <div class="feedbacks" id="feedback">
+        <div class="feedbacks__header">
+            <h3>Feedback</h3>
+        </div>
+        <div class="feedbacks__item">
+            <div class="sender">John Dou</div>
+            <div class="rating">
+                <ng-container *ngFor="let _ of [].constructor(4)">
+                    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
+                </ng-container>
+            </div>
+            <div class="text">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, facere! Quia quam, odit
+                quisquam, cumque eius quod repudiandae labore sint eligendi enim esse. Quis, at animi numquam sapiente
+                nobis iusto.
+            </div>
+        </div>
+        <div class="feedbacks__item">
+            <div class="sender">John Dou</div>
+            <div class="rating">
+                <ng-container *ngFor="let _ of [].constructor(4)">
+                    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
+                </ng-container>
+            </div>
+            <div class="text">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, facere! Quia quam, odit
+                quisquam, cumque eius quod repudiandae labore sint eligendi enim esse. Quis, at animi numquam sapiente
+                nobis iusto.
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="entity-details__aside">
+    <div>
+        <img [src]="quest.banner" alt="banner" width="350">
+    </div>
 </div>
