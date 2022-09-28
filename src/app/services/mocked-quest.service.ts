@@ -13,7 +13,7 @@ nobis iusto.`
 })
 export class MockedQuestService implements AbstractQuestService {
   private readonly lists: customQuest[];
-  private obj1 = <customQuest>{ id: 1, title: 'Crazy train', status: 'draft', description: lorem, rating: 5, complexity: 2, banner: 'https://static.tildacdn.com/tild3838-3031-4230-b739-653439663337/DJI_0129-min.jpg', host: 'John Dou' };
+  private obj1 = <customQuest>{ id: 1, title: 'Crazy train', status: 'draft', description: lorem, rating: 5, complexity: 2, banner: 'https://static.tildacdn.com/tild3838-3031-4230-b739-653439663337/DJI_0129-min.jpg', host: 'admin' };
   private obj2 = <customQuest>{ id: 2, title: 'Old factory', status: 'active', description: lorem, rating: 5, complexity: 3, banner: 'https://media.istockphoto.com/photos/old-industrial-complex-picture-id157585400', host: 'John Dou' };
 
   constructor(
@@ -28,6 +28,14 @@ export class MockedQuestService implements AbstractQuestService {
   public getQuests(): Observable<customQuest[]> {
     return of([...this.lists])
   }
+
+  public getOwnerQuests(): Observable<customQuest[]> {
+    let user = this.userService.currentUser$.value;
+    //TODO: do it on BE
+    let ownerQuests = this.lists.filter(el => el.host == user.username)
+    return of(ownerQuests)
+  }
+
   public getQuestById(id: number): Observable<customQuest> {
     return of(this.lists.find(x => x.id == id) || <customQuest>{});
   };

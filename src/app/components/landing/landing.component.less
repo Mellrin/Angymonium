@@ -1,0 +1,132 @@
+:host {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+
+    &__description {
+        flex-basis: 100%;
+        font: var(--font-text-lg)
+    }
+
+    &__title {
+        margin-bottom: 8px;
+        margin-top: 0;
+    }
+
+}
+
+.quest-section {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+    &__item {
+        flex: 0 0 calc(33% - 10px);
+        margin-right: 20px;
+        margin-top: 20px;
+
+        &:nth-child(2n + 3) {
+            margin-right: 0;
+        }
+    }
+}
+
+.quest {
+    background: var(--modal-bg-color);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+
+    &.status-draft {
+        &:before {
+            content: 'Draft';
+            padding: 6px 24px;
+            background: var(--modal-bg-color);
+            position: absolute;
+            top: -7px;
+            right: -6px;
+            font-family: var(--font-secondary);
+            transform: skew(-20deg, 20deg);
+            width: 90px;
+            text-align: end;
+            z-index: 10;
+        }
+    }
+
+    &__banner {
+        height: 260px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px 8px 0 0;
+        transition: all .6s;
+    }
+
+    &__hidden-content {
+        position: absolute;
+        top: 0;
+        right: 100px;
+        left: 0;
+        padding: 12px 20px;
+        opacity: 0;
+        transition: all .6s;
+    }
+
+    &__header {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            color: var(--lightest-color)
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        //box-shadow: 0 0 3px 1px var(--modal-bg-color);
+
+        .quest__banner {
+            filter: brightness(0.6)
+        }
+
+        .quest__hidden-content {
+            opacity: 1;
+        }
+    }
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    color: var(--orange-color);
+
+    &__number {
+        margin-left: 4px;
+        display: inline-block;
+        font: var(--font-sign);
+    }
+}
+
+.quest-link {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.truncated-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

@@ -10,7 +10,7 @@ import { getErrorMsg } from '../helper/sign-form/sign-form.component';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
-  styleUrls: ['./workspace.component.less']
+  styleUrls: ['./workspace.component.less'],
 })
 export class WorkspaceComponent implements OnInit {
   @ViewChild('createQuest', { static: false }) createQuest!: TemplateRef<any>;
@@ -32,7 +32,7 @@ export class WorkspaceComponent implements OnInit {
 
   ngOnInit() {
     this.quests$ = this.refreshToken$.pipe(
-      switchMap(_ => this.questService.getQuests().pipe()),
+      switchMap(_ => this.questService.getOwnerQuests().pipe()),
     );
   }
 
@@ -42,9 +42,8 @@ export class WorkspaceComponent implements OnInit {
   }
 
   create() {
-    console.warn(this.questFormGroup)
- 
-    if (Object.values(this.questFormGroup.controls).every(val => !val.errors)) {
+
+    if (this.questFormGroup.valid) {
       this.questService.addQuest(this.questFormGroup.value)
         .pipe(
           catchError(e => of(e)),

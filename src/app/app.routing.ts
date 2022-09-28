@@ -16,7 +16,8 @@ export const AppRoutes: Routes = [
   { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard, RoleGuard] },
   { path: 'workspace', component: WorkspaceComponent, canActivate: [AuthGuard] },
   { path: 'entity/:id', component: EntityDetailsComponent },
-  { path: '**', component: LandingComponent },
+  { path: '', component: LandingComponent },
+  { path: '**', redirectTo: '/' },
 ];
 
-export const ROUTING: ModuleWithProviders<any> = RouterModule.forRoot(AppRoutes, { anchorScrolling: 'enabled' });
+export const ROUTING: ModuleWithProviders<any> = RouterModule.forRoot(AppRoutes);

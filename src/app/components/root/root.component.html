@@ -2,6 +2,10 @@
     <nav>
         <ul>
             <ng-container *ngIf="user">
+                <li>
+                    <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"
+                        class="nav-link">Landing</a>
+                </li>
                 <li><a routerLink="/workspace" routerLinkActive="active" class="nav-link">Workspace</a></li>
                 <li><a routerLink="/user-list" routerLinkActive="active" class="nav-link">User list</a></li>
                 <!-- <li><a routerLink="/profile" class="nav-link"> {{user}} profile</a></li> -->

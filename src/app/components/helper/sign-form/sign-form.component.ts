@@ -28,29 +28,29 @@ export function getErrorMsg(x: any) {
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
   styleUrls: ['./sign-form.component.less'],
-  animations: [
-    trigger(
-      'inOutAnimation',
-      [
-        transition(
-          ':enter',
-          [
-            style({ transform: '{{easeTime}}' }),
-            animate('.3s ease-out',
-              style({ transform: 'none' }))
-          ], { params: { easeTime: 'translateX(10px)' } }
-        ),
-        transition(
-          ':leave',
-          [
-            style({ transform: 'none' }),
-            animate('.3s ease-in',
-              style({ transform: '{{easeTime}}' }))
-          ]
-        )
-      ]
-    )
-  ]
+  // animations: [
+  //   trigger(
+  //     'inOutAnimation',
+  //     [
+  //       transition(
+  //         ':enter',
+  //         [
+  //           style({ transform: '{{easeTime}}' }),
+  //           animate('.3s ease-out',
+  //             style({ transform: 'none' }))
+  //         ], { params: { easeTime: 'translateX(10px)' } }
+  //       ),
+  //       transition(
+  //         ':leave',
+  //         [
+  //           style({ transform: 'none' }),
+  //           animate('.3s ease-in',
+  //             style({ transform: '{{easeTime}}' }))
+  //         ]
+  //       )
+  //     ]
+  //   )
+  // ]
 })
 export class SignFormComponent {
   errorMessage: any = getErrorMsg;

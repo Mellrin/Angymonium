@@ -22,6 +22,8 @@ import { SortParamsDirective } from './directives/sort-params.directive';
 import { SpinnerComponent } from './components/helper/spinner/spinner.component';
 import { EntityDetailsComponent } from './components/entity-details/entity-details.component';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { AbstractQuestService } from './services/abstract-quest.service';
+import { MockedQuestService } from './services/mocked-quest.service';
 @NgModule({
   declarations: [
     RootComponent,
@@ -51,7 +53,9 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: AbstractQuestService, useClass: MockedQuestService },
+  ],
   bootstrap: [RootComponent]
 })
 export class AppModule { }
