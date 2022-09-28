@@ -1,34 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, filter, noop, Observable, of, Subject, tap } from 'rxjs';
-
-
-export interface User {
-  username?: string;
-  password: string;
-  email: string;
-}
-
-export interface IUser {
-  username?: string;
-  isAdmin?: boolean;
-  error?: string;
-  field?: string;
-}
+import { BehaviorSubject, catchError, filter, noop, Observable, of, tap } from 'rxjs';
+import { userItem } from '../models/user.model';
 
 @Injectable({ providedIn: "root" })
 export class UserService {
-  currentUser$: Subject<IUser>;
+  emptyUser = <userItem>{ username: '' }
+  currentUser$: BehaviorSubject<userItem> = new BehaviorSubject(this.emptyUser);
 
   constructor(
     private http: HttpClient
   ) {
-    this.currentUser$ = new Subject();
     this.getUserSession().subscribe(noop)
   }
 
   public getUserSession() {
-    return this.http.get<IUser>('/api/user/session')
+    return this.http.get<userItem>('/api/user/session')
       .pipe(
         catchError(e => of(e)),
         filter(res => Object.keys(res).length !== 0),
@@ -39,33 +26,35 @@ export class UserService {
   public logout() {
     return this.http.get('/api/user/logout')
       .subscribe(_ => {
-        this.currentUser$.next({ username: '' });
+        this.currentUser$.next(this.emptyUser);
       });
   }
 
   public getAllRoles() {
-    return this.http.get<any[]>('/api/roles')
+    return this.http.get<userItem['role'][]>('/api/roles')
   }
 
-  public getAllUsers(): Observable<any> {
-    return this.http.get<any[]>('/api/users')
+  public getAllUsers(): Observable<userItem[]> {
+    return this.http.get<userItem[]>('/api/users')
   }
 
-  public submitLogin(user: User): Observable<IUser> {
-    return this.http.post<User>('/api/user/login', user, {
+  public submitLogin(user: userItem): Observable<userItem> {
+    return this.http.post<userItem>('/api/user/login', user, {
       withCredentials: true
     })
   }
 
-  public submitSignup(user: User): Observable<IUser> {
+  public submitSignup(user: userItem): Observable<userItem> {
 
-    return this.http.post<User>('/api/user/create', user, {
+    return this.http.post<userItem>('/api/user/create', user, {
       withCredentials: true
     })
   }
 
-  public updateUser(user: any) {
-    return this.http.patch('/api/user/update', { username: user.username, role: user.role })
+  public updateUser(user: userItem) {
+    let username = user.username;
+    let role = user.role;
+    return this.http.patch('/api/user/update', { username, role })
   }
 
 }

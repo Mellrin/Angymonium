@@ -1,0 +1,50 @@
+:host {
+    width: 100%;
+}
+
+.tag {
+    background: var(--heading-color);
+    color: var(--primary-bg-color);
+    font: var(--font-btn);
+    padding: 6px 12px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    border-radius: 6px;
+}
+
+
+.feedback {
+    padding: 20px;
+    border: 1px solid;
+    padding: 16px 24px;
+    border-radius: 6px;
+    margin-top: 16px;
+    &__rating {
+        color: var(--orange-color);
+        display: flex;
+        margin-left: auto;
+        align-items: baseline;
+    }
+    &__header {
+        display: flex;
+        margin-bottom: 8px;
+    }
+
+    &__sender {
+        margin-right: 16px;
+    }
+    
+}
+
+.section {
+    padding: 20px 0;
+
+    &__header {
+        margin-bottom: 20px;
+    }
+}
+.link-accent {
+    ::ng-deep svg {
+        margin-left: 8px;
+    }
+}

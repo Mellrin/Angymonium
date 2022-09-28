@@ -34,7 +34,6 @@ router.post('/create', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
-        const role = await Role.findById(user.role._id);
 
         if (user === null) {
             return res.status(404).json({
@@ -42,6 +41,8 @@ router.post('/login', async (req, res) => {
                 field: 'email'
             })
         }
+
+        const role = await Role.findById(user?.role?._id);
 
         if (await bcrypt.compare(req.body.password, user.password)) {
             req.session.username = user.username;

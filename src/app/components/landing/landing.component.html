@@ -1,4 +1,25 @@
-<h1>
-    Quest list
-</h1>
-<p>landing works!</p>
+<div class="header">
+    <h1 class="header__title">
+        Quest list
+    </h1>
+</div>
+
+<section *ngIf="quests$ | async as quests" class="quest-section">
+    <div *ngFor="let quest of quests" class="quest-section__item quest"
+        [ngClass]="{'status-draft': quest.status === 'draft'}">
+        <div class="quest__banner" [ngStyle]="{'background-image': 'url(' + quest.banner + ')'}">
+        </div>
+        <div class="quest__hidden-content">
+            <p class="rating">
+                <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
+                <span class="rating__number">{{quest.rating}}</span>
+            </p>
+            <p class="truncated-text">{{quest.description}}</p>
+        </div>
+        <a routerLink="/entity/{{quest.id}}" class="quest-link"></a>
+        <div class="quest__header">
+            <h3>{{quest.title}}</h3>
+            <app-complexity-level [level]="quest.complexity"></app-complexity-level>
+        </div>
+    </div>
+</section>

@@ -20,6 +20,10 @@ import { SafeHTMLPipe } from './pipes/safe-html.pipe';
 import { ComplexityLevelComponent } from './components/helper/complexity-level/complexity-level.component';
 import { SortParamsDirective } from './directives/sort-params.directive';
 import { SpinnerComponent } from './components/helper/spinner/spinner.component';
+import { EntityDetailsComponent } from './components/entity-details/entity-details.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { AbstractQuestService } from './services/abstract-quest.service';
+import { MockedQuestService } from './services/mocked-quest.service';
 @NgModule({
   declarations: [
     RootComponent,
@@ -37,7 +41,9 @@ import { SpinnerComponent } from './components/helper/spinner/spinner.component'
     SafeHTMLPipe,
     ComplexityLevelComponent,
     SortParamsDirective,
-    SpinnerComponent
+    SpinnerComponent,
+    EntityDetailsComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +53,9 @@ import { SpinnerComponent } from './components/helper/spinner/spinner.component'
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: AbstractQuestService, useClass: MockedQuestService },
+  ],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

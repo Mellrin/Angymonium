@@ -1,0 +1,84 @@
+<section>
+    <h1>
+        {{quest.title}}
+        <span *ngIf="quest.status === 'draft'" class="tag">{{quest.status}}</span>
+    </h1>
+
+    <div>
+        <a class="link-accent" href="#" (click)="scrollToIdRef($event, feedbacks)">
+            Feedback
+            <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>{{quest.rating}}
+        </a>
+    </div>
+</section>
+<section>
+    <p>
+        <app-complexity-level [level]="quest.complexity"></app-complexity-level>
+    </p>
+    <p>
+        {{quest.description}}
+    </p>
+</section>
+
+<section class="section">
+    <div class="section__header">
+        <h3>Galery</h3>
+    </div>
+    <div>
+        <img [src]="quest.banner" alt="banner" width="350">
+    </div>
+</section>
+
+<section class="section">
+    <div class="section__header">
+        <h3>Booking</h3>
+    </div>
+    <div>
+        The feature will be implemented soon..
+    </div>
+</section>
+
+<section class="section" #feedbacks>
+    <div class="section__header">
+        <h3>Feedback</h3>
+    </div>
+    <div class="feedback">
+        <div class="feedback__header">
+            <div>
+                <span class="feedback__sender"> John Dou </span>
+                {{date | date: 'short'}}
+            </div>
+
+            <div class="feedback__rating">
+                <ng-container *ngFor="let _ of [].constructor(4)">
+                    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="feedback__text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, facere! Quia quam, odit
+            quisquam, cumque eius quod repudiandae labore sint eligendi enim esse. Quis, at animi numquam sapiente
+            nobis iusto.
+        </div>
+    </div>
+    <div class="feedback">
+        <div class="feedback__header">
+            <div>
+                <span class="feedback__sender"> John Dou </span>
+                {{date | date: 'short'}}
+            </div>
+
+            <div class="feedback__rating">
+                <ng-container *ngFor="let _ of [].constructor(4)">
+                    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
+                </ng-container>
+            </div>
+        </div>
+        <div class="feedback__text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, facere! Quia quam, odit
+            quisquam, cumque eius quod repudiandae labore sint eligendi enim esse. Quis, at animi numquam sapiente
+            nobis iusto.
+        </div>
+    </div>
+</section>
