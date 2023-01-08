@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewCh
 import { FormGroup } from '@angular/forms';
 import { trigger, style, animate, transition } from '@angular/animations';
 
-export function getErrorMsg(x: any) {
+export function getErrorMsg(x: any): string {
   if (x.errors?.backendError) {
     return x.errors.backendError
   }

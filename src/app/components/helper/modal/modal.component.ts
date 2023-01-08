@@ -8,7 +8,7 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class ModalComponent {
   @Input('title') title: string = '';
-  @Input() currentTemplate!: TemplateRef<any>;
+  @Input() currentTemplate!: TemplateRef<HTMLAllCollection>;
 
   constructor(
     public modalService: ModalService,
@@ -21,8 +21,8 @@ export class ModalComponent {
     this.modalService.close();
   }
 
-  handleClick(event: any) {
-    if (event.target.tagName === 'section'.toUpperCase() && this.eRef.nativeElement.contains(event.target)) {
+  handleClick(event: Event) {
+    if ((event.target as HTMLElement).tagName === 'section'.toUpperCase() && this.eRef.nativeElement.contains(event.target)) {
       this.modalService.close();
     }
   }

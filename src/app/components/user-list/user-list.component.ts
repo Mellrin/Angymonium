@@ -13,7 +13,7 @@ import { ModalComponent } from '../helper/modal/modal.component';
   styleUrls: ['./user-list.component.less']
 })
 export class UserListComponent implements OnInit {
-  @ViewChild('updateUserRole', { static: false }) updateUserRole!: TemplateRef<any>;
+  @ViewChild('updateUserRole', { static: false }) updateUserRole!: TemplateRef<HTMLAllCollection>;
 
   userList$!: Observable<userItem[]>;
   roles$!: Observable<userItem["role"][]>;
@@ -66,7 +66,7 @@ export class UserListComponent implements OnInit {
     this.selectedUser.role = item;
   }
 
-  setSortParams(param: any) {
+  setSortParams(param: {dir: string, col: keyof userItem, typ: string}) {
     this.direction = param.dir;
     this.column = param.col;
     this.type = param.typ;

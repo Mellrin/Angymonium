@@ -5,7 +5,8 @@ import {
   ComponentFactoryResolver,
   EmbeddedViewRef,
   Injector,
-  OnInit
+  OnInit,
+  TemplateRef
 } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -26,7 +27,7 @@ export class ModalService {
     this.componentRef.destroy();
   }
 
-  open(component: any, title: string, template: any) {
+  open(component: any, title: string, template: TemplateRef<HTMLAllCollection> | null) {
     
     this.componentRef = this.componentFactoryResolver
       .resolveComponentFactory(component)
@@ -36,7 +37,7 @@ export class ModalService {
 
     this.appRef.attachView(this.componentRef.hostView);
 
-    const domElem = (this.componentRef.hostView as EmbeddedViewRef<any>)
+    const domElem = (this.componentRef.hostView as EmbeddedViewRef<HTMLAllCollection>)
       .rootNodes[0] as HTMLElement;
 
     const rootElementRef = this.injector.get(this.appRef.componentTypes[0])

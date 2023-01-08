@@ -24,6 +24,8 @@ import { EntityDetailsComponent } from './components/entity-details/entity-detai
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
 import { AbstractQuestService } from './services/abstract-quest.service';
 import { MockedQuestService } from './services/mocked-quest.service';
+import { BookingComponent } from './components/helper/booking/booking.component';
+import { TimeSlotComponent } from './components/helper/booking/time-slot/time-slot.component';
 @NgModule({
   declarations: [
     RootComponent,
@@ -43,7 +45,9 @@ import { MockedQuestService } from './services/mocked-quest.service';
     SortParamsDirective,
     SpinnerComponent,
     EntityDetailsComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    BookingComponent,
+    TimeSlotComponent
   ],
   imports: [
     BrowserModule,

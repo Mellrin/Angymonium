@@ -1,0 +1,52 @@
+<div (click)="onClick()" [ngClass]="getClass">
+    {{ slot | date:'shortTime'}} 
+</div>
+
+<ng-template #bookQuest>
+    <div>
+        {{ slot | date: 'medium'}} 
+    </div>
+    <div>
+        имя квеста
+    </div>
+ 
+    <div>
+        Стоимость
+        5500 р.
+    </div>
+
+    <form class="form" [formGroup]="questFormGroup" #questForm="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="form__field">
+            <input class="form-control" [placeholder]="'name' | placeholder" formControlName="name">
+
+            <!-- <div class="form__field--error" *ngIf="questForm.submitted && questFormGroup.get('title')?.errors">
+                {{ errorMessage(questFormGroup.get('title')) }}
+            </div> -->
+        </div>
+        <div class="form__field">
+            <input class="form-control" [placeholder]="'email' | placeholder" formControlName="email">
+
+            <!-- <div class="form__field--error" *ngIf="questForm.submitted && questFormGroup.get('title')?.errors">
+                {{ errorMessage(questFormGroup.get('title')) }}
+            </div> -->
+        </div>
+        <div class="form__field">
+            <input class="form-control" [placeholder]="'phone' | placeholder" formControlName="phone">
+
+            <!-- <div class="form__field--error" *ngIf="questForm.submitted && questFormGroup.get('title')?.errors">
+                {{ errorMessage(questFormGroup.get('title')) }}
+            </div> -->
+        </div>
+
+        <div class="form__field">
+            <textarea class="form-control" name="comment" id="comment" rows="1"
+                [placeholder]="'comment' | placeholder " formControlName="comment"></textarea>
+            <!-- <div class="form__field--error" *ngIf="questForm.submitted && questFormGroup.get('description')?.errors">
+                {{ errorMessage(questFormGroup.get('description')) }}
+            </div> -->
+        </div>
+
+        <button class="btn btn--primary" #submit type="submit">Book</button>
+    </form>
+</ng-template>

@@ -16,10 +16,10 @@
         <div class="quest__banner" [ngStyle]="{'background-image': 'url(' + quest.banner + ')'}">
         </div>
         <div class="quest__hidden-content">
-            <p class="rating">
+            <!-- <p class="rating">
                 <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
                 <span class="rating__number">{{quest.rating}}</span>
-            </p>
+            </p> -->
             <p class="truncated-text">{{quest.description}}</p>
         </div>
         <a routerLink="/entity/{{quest.id}}" class="quest-link"></a>

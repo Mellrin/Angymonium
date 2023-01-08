@@ -26,7 +26,7 @@ export class DropdownComponent implements OnInit {
   }
 
   @HostListener("document:click", ['$event'])
-  clickedOut(event: any) {
+  clickedOut(event: Event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
       this.dropdownOpen = false;
     }

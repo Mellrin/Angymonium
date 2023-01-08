@@ -1,0 +1,51 @@
+.month {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    flex-basis: 14%;
+    border: 5px solid transparent;
+    padding: 12px;
+    box-sizing: border-box;
+    box-shadow: inset 0px 0px 4px 0px var(--heading-color);
+
+    &-empty {
+        box-shadow: none;
+    }
+}
+
+.slot {
+    border-radius: 6px;
+    margin: 4px;
+    padding: 4px;
+}
+.active-slot {
+    cursor: pointer;
+    &:hover{
+        filter: opacity(0.8);
+    }
+}
+
+.price-3 {
+    .slot;
+    .active-slot;
+    background: var(--green-color);
+}
+
+.price-2 {
+    .slot;
+    .active-slot;
+    background: var(--border-color);
+}
+
+.price-1 {
+    .slot;
+    .active-slot;
+    background: var(--violet-color);  
+}
+
+.price-booked {
+    .slot;
+    background: var(--modal-bg-color);
+}

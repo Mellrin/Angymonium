@@ -10,9 +10,9 @@
         <div class="quest__banner" [ngStyle]="{'background-image': 'url(' + quest.banner + ')'}">
         </div>
         <div class="quest__hidden-content">
-            <p class="rating">
+            <p class="rating" [ngStyle]="!quest.rating ? {'color': 'var(--heading-color)'} : {}">
                 <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
-                <span class="rating__number">{{quest.rating}}</span>
+                <span class="rating__number">{{quest.rating || 'Not scored yet'}}</span>
             </p>
             <p class="truncated-text">{{quest.description}}</p>
         </div>
