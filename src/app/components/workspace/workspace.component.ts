@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, catchError, noop, Observable, of, switchMap, tap } from 'rxjs';
-import { customQuest } from 'src/app/models/quest.model';
+import { IQuest } from 'src/app/models/quest.model';
 import { AbstractQuestService } from 'src/app/services/abstract-quest.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalComponent } from '../helper/modal/modal.component';
@@ -13,11 +13,11 @@ import { getErrorMsg } from '../helper/sign-form/sign-form.component';
   styleUrls: ['./workspace.component.less'],
 })
 export class WorkspaceComponent implements OnInit {
-  @ViewChild('createQuest', { static: false }) createQuest!: TemplateRef<any>;
-  errorMessage: any = getErrorMsg
+  @ViewChild('createQuest', { static: false }) createQuest!: TemplateRef<HTMLAllCollection>;
+  errorMessage = getErrorMsg
 
   questFormGroup: FormGroup;
-  quests$!: Observable<customQuest[]>
+  quests$!: Observable<IQuest[]>
   refreshToken$ = new BehaviorSubject<boolean>(true);
 
   constructor(

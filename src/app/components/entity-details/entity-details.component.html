@@ -7,7 +7,10 @@
     <div>
         <a class="link-accent" href="#" (click)="scrollToIdRef($event, feedbacks)">
             Feedback
-            <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>{{quest.rating}}
+            <app-svg-icon icon="starFilled" [size]="18" *ngIf='!!score'></app-svg-icon>
+            <span [ngStyle]="!!score ? {} : {'color': 'var(--heading-color)', marginLeft: '8px' }">
+                {{score || 'Not scored yet'}}
+            </span>
         </a>
     </div>
 </section>
@@ -34,7 +37,7 @@
         <h3>Booking</h3>
     </div>
     <div>
-        The feature will be implemented soon..
+        <app-booking [quest]="quest"></app-booking>
     </div>
 </section>
 
@@ -42,43 +45,27 @@
     <div class="section__header">
         <h3>Feedback</h3>
     </div>
-    <div class="feedback">
-        <div class="feedback__header">
-            <div>
-                <span class="feedback__sender"> John Dou </span>
-                {{date | date: 'short'}}
-            </div>
+    <ng-container *ngFor="let feedbackItem of quest.feedbacks">
+        <div class="feedback">
+            <div class="feedback__header">
+                <div>
+                    <span class="feedback__sender"> {{feedbackItem.author}}</span>
+                    {{feedbackItem.time | date: 'short'}}
+                </div>
 
-            <div class="feedback__rating">
-                <ng-container *ngFor="let _ of [].constructor(4)">
-                    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
-                </ng-container>
+                <div class="feedback__rating">
+                    <ng-container *ngFor="let _ of [].constructor(feedbackItem.score)">
+                        <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="feedback__text">
+                {{feedbackItem.text}}
             </div>
         </div>
-
-        <div class="feedback__text">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, facere! Quia quam, odit
-            quisquam, cumque eius quod repudiandae labore sint eligendi enim esse. Quis, at animi numquam sapiente
-            nobis iusto.
-        </div>
-    </div>
-    <div class="feedback">
-        <div class="feedback__header">
-            <div>
-                <span class="feedback__sender"> John Dou </span>
-                {{date | date: 'short'}}
-            </div>
-
-            <div class="feedback__rating">
-                <ng-container *ngFor="let _ of [].constructor(4)">
-                    <app-svg-icon icon="starFilled" [size]="18"></app-svg-icon>
-                </ng-container>
-            </div>
-        </div>
-        <div class="feedback__text">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, facere! Quia quam, odit
-            quisquam, cumque eius quod repudiandae labore sint eligendi enim esse. Quis, at animi numquam sapiente
-            nobis iusto.
-        </div>
+    </ng-container>
+    <div *ngIf="!quest.feedbacks">
+        Nobody left feedback yet
+        😳
     </div>
 </section>

@@ -1,0 +1,30 @@
+<pre>WIP</pre>
+<h4>{{currentMonth}}</h4>
+<div>
+    Цена для команды из 2-4 человек, доплата за 5, 6-го игроков - 1000 руб./чел.
+</div>
+стоимость игры
+<div class="month">
+    <div class="day day-empty">
+        <div class="price-1">4 500 р</div>
+        <div class="price-3">5 000 р</div>
+        <div class="price-2">5 500 р</div>
+    </div>
+</div>
+
+<div class="month">
+    <ng-container *ngFor="let _ of [].constructor(emptyDays)">
+        <div class="day day-empty"></div>
+    </ng-container>
+    <ng-container *ngFor="let item of arrMonth; let i = index">
+        <div class="day">
+            <div>
+                {{item[0] | date}}
+                {{this.dayName(item[0])}}
+            </div>
+            <ng-container *ngFor="let slot of item; let j = index">
+                <app-time-slot [slot]="slot" [booked]="getBookedSlots(slot)" (onSubmitEvent)="onBooking($event)"></app-time-slot>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

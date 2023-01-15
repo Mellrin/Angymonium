@@ -12,7 +12,7 @@ export class SortParamsDirective {
     this.selectSort(this.element.nativeElement.id)
   }
 
-  selectSort(id: any) {
+  selectSort(id: string) {
     switch (id) {
       case 'usernameAsc':
         this.param.emit({ dir: 'asc', col: 'username', typ: 'string' })
